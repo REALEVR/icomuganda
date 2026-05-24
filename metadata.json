@@ -1,0 +1,8 @@
+{
+  "name": "ICOM Uganda Digital",
+  "description": "Uganda's leading digital infrastructure for museums, heritage preservation, virtual tours, and member engagement.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

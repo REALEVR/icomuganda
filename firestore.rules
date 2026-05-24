@@ -1,0 +1,52 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} { allow read, write: if false; }
+
+    function isValidId(id) { return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$'); }
+    function incoming() { return request.resource.data; }
+    function existing() { return resource.data; }
+    function isSignedIn() { return request.auth != null; }
+
+    function isValidUser(data) {
+      return data.keys().hasAll(['uid', 'email', 'score', 'createdAt', 'updatedAt'])
+        && data.keys().size() >= 5
+        && data.uid == request.auth.uid
+        && data.email is string && data.email.size() <= 256
+        && (data.get('displayName', '') is string && data.get('displayName', '').size() <= 100)
+        && data.score is number && data.score >= 0
+        && data.createdAt is string
+        && data.updatedAt is string;
+    }
+
+    function isValidUserUpdate(data) {
+        return data.keys().hasAll(['uid', 'email', 'score', 'createdAt', 'updatedAt'])
+        && data.uid == existing().uid
+        && data.email == existing().email
+        && (data.get('displayName', '') is string && data.get('displayName', '').size() <= 100)
+        && data.score is number && data.score >= 0
+        && data.createdAt == existing().createdAt
+        && data.updatedAt is string;
+    }
+
+    match /users/{userId} {
+      allow get: if isSignedIn();
+      allow list: if isSignedIn(); // Everyone can see leaderboard
+      allow create: if isSignedIn() && isValidId(userId) && userId == request.auth.uid && isValidUser(incoming());
+      allow update: if (
+        isSignedIn()
+        && isValidId(userId)
+        && userId == request.auth.uid
+        && isValidUserUpdate(incoming())
+        && (
+          incoming().diff(existing()).affectedKeys().hasOnly(['score', 'updatedAt', 'displayName'])
+        )
+      );
+    }
+    
+    match /questions/{questionId} {
+      allow read: if true;
+      allow write: if true; // Just for initial seeding
+    }
+  }
+}
