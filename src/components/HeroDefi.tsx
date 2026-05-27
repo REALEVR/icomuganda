@@ -8,18 +8,18 @@ export function Navbar() {
   return (
     <nav className="flex items-center justify-between py-6 px-6 md:px-10 w-full relative z-10">
       <div className="flex-1 flex md:hidden items-center">
-         <span className="font-regular text-xl font-bold text-white tracking-widest cursor-pointer" onClick={() => navigate('/')}>ICOM Uganda</span>
+         <span className="font-regular text-xl font-bold text-white tracking-widest cursor-pointer" onClick={() => navigate('/')}>ICOM UGANDA</span>
       </div>
       <div className="flex-1 hidden md:block" />
       <ul className="hidden md:flex items-center gap-8 text-[rgb(240,240,240)] font-normal text-sm drop-shadow-md">
-        <li className="cursor-pointer hover:opacity-70 transition-opacity flex items-center gap-1 group" onClick={() => navigate('/museums')}>
-          Museums
+        <li className="cursor-pointer hover:opacity-70 transition-opacity flex items-center gap-1 group" onClick={() => navigate('/')}>
+          ICOM Uganda
         </li>
         <li className="cursor-pointer hover:opacity-70 transition-opacity flex items-center gap-1 group" onClick={() => navigate('/events')}>
           Events <ChevronRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
         </li>
-        <li className="cursor-pointer hover:opacity-70 transition-opacity flex items-center gap-1 group" onClick={() => navigate('/media')}>
-          Gallery
+        <li className="cursor-pointer hover:opacity-70 transition-opacity flex items-center gap-1 group" onClick={() => navigate('/museums')}>
+          Directory
         </li>
         <li className="cursor-pointer hover:opacity-70 transition-opacity flex items-center gap-1 group" onClick={() => navigate('/virtual-tours')}>
           Tours <ChevronRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
@@ -30,13 +30,13 @@ export function Navbar() {
         <motion.button 
           whileHover={{ scale: 1.02 }} 
           whileTap={{ scale: 0.98 }}
-          onClick={() => navigate('/game')}
+          onClick={() => navigate('/membership')}
           className="flex items-center bg-[rgba(255,255,255,0.15)] backdrop-blur-md border border-white/20 text-white rounded-full pl-2 pr-4 md:pr-6 py-1.5 md:py-2 gap-2 md:gap-3 hover:bg-[rgba(255,255,255,0.25)] transition-colors group"
         >
           <div className="bg-white/20 p-1 md:p-1.5 rounded-full flex items-center justify-center">
             <ArrowUpRight className="w-4 h-4 md:w-5 md:h-5 text-white" />
           </div>
-          <span className="text-xs md:text-sm font-normal">Play Game</span>
+          <span className="text-xs md:text-sm font-normal">Become a Member</span>
         </motion.button>
       </div>
     </nav>
@@ -52,7 +52,7 @@ export function HeroBadge() {
       className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/30 backdrop-blur-md border border-white/20 mx-auto mb-3 w-fit"
     >
       <Sparkles className="w-4 h-4 text-white" />
-      <span className="text-[14px] font-normal text-white drop-shadow-sm">Uganda's Heritage</span>
+      <span className="text-[14px] font-normal text-white drop-shadow-sm">International Council of Museums</span>
     </motion.div>
   );
 }
@@ -67,19 +67,19 @@ export function BottomLeftCard() {
       className="absolute bottom-28 right-4 left-auto md:left-6 md:right-auto md:bottom-6 lg:bottom-10 lg:left-10 p-3 md:p-4 lg:p-5 rounded-[1.2rem] md:rounded-[1.5rem] lg:rounded-[2.2rem] bg-white/30 backdrop-blur-xl flex flex-col gap-2 lg:gap-3 min-w-[140px] md:min-w-[150px] lg:min-w-[180px] w-fit border border-white/20"
     >
       <div className="flex flex-col">
-        <span className="text-2xl md:text-3xl font-bold text-white tracking-tight drop-shadow-md">5.2K</span>
-        <span className="text-[10px] md:text-[12px] font-semibold text-white/90 uppercase tracking-wider">Active Visitors</span>
+        <span className="text-2xl md:text-3xl font-bold text-white tracking-tight drop-shadow-md">Professional</span>
+        <span className="text-[10px] md:text-[12px] font-semibold text-white/90 uppercase tracking-wider">Network</span>
       </div>
       <motion.button 
         whileHover={{ scale: 1.02 }} 
         whileTap={{ scale: 0.98 }}
-        onClick={() => navigate('/events')}
+        onClick={() => navigate('/membership')}
         className="flex items-center bg-white rounded-full pl-1.5 pr-5 py-1.5 gap-2 hover:bg-white/90 transition-colors self-start group mt-1 shadow-lg"
       >
         <div className="bg-[rgba(30,50,90,0.1)] p-1 rounded-full flex items-center justify-center">
           <ArrowUpRight className="w-4 h-4 text-[rgba(30,50,90,0.9)]" />
         </div>
-        <span className="text-[14px] font-medium text-[rgba(30,50,90,0.9)]">Plan Visit</span>
+        <span className="text-[14px] font-medium text-[rgba(30,50,90,0.9)]">Join ICOM</span>
       </motion.button>
     </motion.div>
   );
@@ -110,8 +110,8 @@ export function BottomRightCorner() {
       </div>
       <div className="flex flex-col">
         <span className="text-[16px] md:text-[20px] font-bold text-[rgba(30,50,90,0.95)]">Exhibitions</span>
-        <div className="flex items-center gap-1 text-[rgba(30,50,90,0.6)] cursor-pointer hover:text-[rgba(30,50,90,0.8)] transition-colors" onClick={() => navigate('/media')}>
-          <span className="text-[12px] md:text-[15px] font-medium">Gallery</span>
+        <div className="flex items-center gap-1 text-[rgba(30,50,90,0.6)] cursor-pointer hover:text-[rgba(30,50,90,0.8)] transition-colors" onClick={() => navigate('/events')}>
+          <span className="text-[12px] md:text-[15px] font-medium">IMD 2026</span>
           <ChevronRight className="w-3 h-3 md:w-4 md:h-4" />
         </div>
       </div>
@@ -138,9 +138,9 @@ export function HeroDefi() {
               initial={{ opacity: 0, scale: 0.98 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-[80px] font-bold text-white mb-4 tracking-tight leading-[1.05] drop-shadow-xl"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-[72px] font-bold text-white mb-4 tracking-tight leading-[1.05] drop-shadow-xl font-serif"
             >
-              Discover Uganda's Heritage
+              The Voice of Uganda's Museums
             </motion.h1>
             <motion.p
               initial={{ opacity: 0 }}
@@ -148,7 +148,7 @@ export function HeroDefi() {
               transition={{ duration: 0.8, delay: 0.4 }}
               className="text-sm sm:text-base md:text-lg text-white/90 leading-relaxed max-w-xl font-medium drop-shadow-md"
             >
-              Explore rich cultural exhibitions, discover ancient artifacts, and connect with our vibrant history through our digital repository.
+              ICOM Uganda is the national network representing museum professionals. Join us in preserving, advancing, and celebrating our cultural heritage.
             </motion.p>
           </div>
           

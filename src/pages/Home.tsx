@@ -12,6 +12,7 @@ import img1Img from "../assets/images/img1.jpg";
 import img2Img from "../assets/images/img2.jpg";
 import uraMuseumImg from "../assets/images/ura-museum.jpg";
 import uppcImg from "../assets/images/uppc.jpg";
+import imdPoster from "../assets/images/imd-poster.jpg";
 import { ChatFeedback } from "../components/ChatFeedback";
 import { MUSEUMS_DATA } from "../data/museums";
 import { UPLOADED_IMAGES } from "../data/uploadedImages";
@@ -46,8 +47,8 @@ export function Home() {
       {/* Hero Section */}
       <HeroDefi />
 
-      {/* Exhibitor's Message - Woven in Time */}
-      <section className="py-24 bg-earth-dark text-warm-white relative overflow-hidden">
+      {/* ICOM About & Membership Section */}
+      <section id="membership-section" className="py-24 bg-earth-dark text-warm-white relative overflow-hidden">
         <div className="container mx-auto px-6 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <motion.div
@@ -55,19 +56,22 @@ export function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
             >
-              <h3 className="text-earth-accent font-semibold tracking-widest uppercase text-sm mb-4">Exhibitor's Message</h3>
-              <h2 className="font-serif text-5xl md:text-6xl font-medium mb-8">Woven in Time</h2>
+              <h3 className="text-earth-accent font-semibold tracking-widest uppercase text-sm mb-4">About ICOM</h3>
+              <h2 className="font-serif text-5xl md:text-6xl font-medium mb-8">Empowering Museum Professionals</h2>
               <div className="space-y-6 text-lg text-white/80 font-light leading-relaxed">
                 <p>
-                  "Woven in Time represents our collective journey as a nation. These pieces highlight the intricate threads of our cultural fabric, bridging the ancestral with the contemporary."
+                  The International Council of Museums (ICOM) is the global organization of museums and museum professionals committed to the research, conservation, continuation, and communication to society of the world's natural and cultural heritage.
                 </p>
                 <p>
-                  Every piece tells a story of resilience, artistry, and tradition. We invite you to explore this thematic collection, curated exclusively for our digital explorers to celebrate Uganda's enduring legacy.
+                  ICOM Uganda forms a critical node in this international network, bringing together the nation’s leading cultural stewards. By joining, you gain access to an international forum of experts, exclusive resources, and collaborative opportunities spanning beyond borders.
                 </p>
               </div>
-              <div className="mt-10">
-                 <Link to="/media" className="inline-flex flex-row items-center gap-3 text-white uppercase tracking-widest text-sm font-semibold hover:text-earth-accent transition-colors border-b border-white/30 hover:border-earth-accent pb-1">
-                    Explore Theme <ArrowRight className="w-4 h-4" />
+              <div className="mt-10 flex flex-wrap gap-6 items-center">
+                 <Link to="/membership" className="bg-earth-accent text-warm-white px-8 py-4 rounded-full font-bold tracking-widest uppercase text-sm hover:bg-white hover:text-earth-dark transition-all inline-block shadow-xl">
+                    Register Now
+                 </Link>
+                 <Link to="/about" className="inline-flex flex-row items-center gap-3 text-white uppercase tracking-widest text-sm font-semibold hover:text-earth-accent transition-colors border-b border-white/30 hover:border-earth-accent pb-1">
+                    Read Our Mission <ArrowRight className="w-4 h-4" />
                  </Link>
               </div>
             </motion.div>
@@ -77,27 +81,36 @@ export function Home() {
                  initial={{ opacity: 0, scale: 0.95 }}
                  whileInView={{ opacity: 1, scale: 1 }}
                  viewport={{ once: true }}
-                 className="col-span-1 row-span-2 rounded-[2rem] overflow-hidden shadow-2xl relative group"
+                 className="col-span-1 row-span-2 rounded-[2rem] overflow-hidden shadow-2xl relative group bg-stone border border-white/10"
                >
-                 <img src={UPLOADED_IMAGES[10]} alt="Woven in Time Exhibition 1" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                 <img src={UPLOADED_IMAGES[10]} alt="ICOM Uganda Members Event" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end p-6">
+                    <span className="text-white font-medium text-lg leading-tight drop-shadow-md">Professional Networking</span>
+                 </div>
                </motion.div>
                <motion.div 
                  initial={{ opacity: 0, scale: 0.95 }}
                  whileInView={{ opacity: 1, scale: 1 }}
                  viewport={{ once: true }}
                  transition={{ delay: 0.2 }}
-                 className="col-span-1 rounded-[2rem] overflow-hidden shadow-2xl relative group bg-stone"
+                 className="col-span-1 rounded-[2rem] overflow-hidden shadow-2xl relative group bg-stone border border-white/10"
                >
-                 <img src={UPLOADED_IMAGES[11]} alt="Woven in Time Exhibition 2" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                 <img src={UPLOADED_IMAGES[11]} alt="ICOM Standards Workshop" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end p-5">
+                    <span className="text-white font-medium text-sm leading-tight drop-shadow-md">Global Standards</span>
+                 </div>
                </motion.div>
                <motion.div 
                  initial={{ opacity: 0, scale: 0.95 }}
                  whileInView={{ opacity: 1, scale: 1 }}
                  viewport={{ once: true }}
                  transition={{ delay: 0.4 }}
-                 className="col-span-1 rounded-[2rem] overflow-hidden shadow-2xl relative group bg-stone"
+                 className="col-span-1 rounded-[2rem] overflow-hidden shadow-2xl relative group bg-stone border border-white/10"
                >
-                 <img src={UPLOADED_IMAGES[12]} alt="Woven in Time Exhibition 3" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                 <img src={UPLOADED_IMAGES[12]} alt="International Collaboration" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end p-5">
+                    <span className="text-white font-medium text-sm leading-tight drop-shadow-md">International Collaboration</span>
+                 </div>
                </motion.div>
             </div>
           </div>
@@ -117,7 +130,7 @@ export function Home() {
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-16">
             <div className="md:col-span-7 group cursor-pointer" onClick={() => window.location.href = '/events'}>
               <div className="aspect-[4/3] overflow-hidden rounded-[32px] mb-8 bg-stone">
-                <img src="/imd-poster.jpg" alt="International Museum Day" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                <img src={imdPoster} alt="International Museum Day" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
               </div>
               <h3 className="text-earth-accent font-semibold mb-3 tracking-widest uppercase text-sm">Exhibition</h3>
               <h4 className="font-serif text-3xl md:text-5xl text-earth-dark mb-4 group-hover:text-woven-teal transition-colors leading-tight">Museums Uniting a Divided World</h4>
