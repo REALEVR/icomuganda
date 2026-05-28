@@ -126,8 +126,9 @@ export function HeroDefi() {
         <img 
           src="/hero-background.50.27 PM.jpeg" 
           alt="Hero Background"
-          className="absolute inset-0 w-full h-full object-cover object-[65%] lg:object-center z-0 opacity-80 mix-blend-overlay"
+          className="absolute inset-0 w-full h-full object-cover object-[65%] lg:object-center z-0"
         />
+        <div className="absolute inset-0 bg-black/60 z-0" />
         
         <div className="relative z-10 w-full h-full flex flex-col items-center justify-between pb-24 md:pb-0">
           <Navbar />
