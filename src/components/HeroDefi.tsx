@@ -122,13 +122,14 @@ export function BottomRightCorner() {
 export function HeroDefi() {
   return (
     <div className="w-full h-[90vh] md:h-screen flex items-center justify-center p-3 md:p-5 bg-[#f0f0f0]">
-      <section className="relative w-full max-w-[1536px] h-full rounded-[1.5rem] md:rounded-[3rem] overflow-hidden flex flex-col items-center bg-black/40 group">
+      <section className="relative w-full max-w-[1536px] h-full rounded-[1.5rem] md:rounded-[3rem] overflow-hidden flex flex-col items-center bg-black/10 group">
         <img 
           src="/hero-background.50.27 PM.jpeg" 
           alt="Hero Background"
-          className="absolute inset-0 w-full h-full object-cover object-[65%] lg:object-center z-0"
+          className="absolute inset-0 w-full h-full object-cover object-[65%] lg:object-center z-0 brightness-115 saturate-135 contrast-[103%] transition-all duration-1000 group-hover:scale-[1.02]"
         />
-        <div className="absolute inset-0 bg-black/60 z-0" />
+        {/* Soft, colorful ambient gradient to make it brighter in the middle, and maintain text contrast top/bottom */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/45 via-black/15 to-black/55 z-0" />
         
         <div className="relative z-10 w-full h-full flex flex-col items-center justify-between pb-24 md:pb-0">
           <Navbar />

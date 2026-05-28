@@ -93,24 +93,18 @@ export function Home() {
                  whileInView={{ opacity: 1, scale: 1 }}
                  viewport={{ once: true }}
                  transition={{ delay: 0.2 }}
-                 className="col-span-1 rounded-[2rem] overflow-hidden shadow-2xl relative group bg-stone border border-white/10"
+                 className="col-span-1 rounded-[2rem] overflow-hidden shadow-2xl relative group bg-stone border border-whitesmoke/10"
                >
-                 <img src={UPLOADED_IMAGES[13]} alt="ICOM Standards Workshop" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end p-5">
-                    <span className="text-white font-medium text-sm leading-tight drop-shadow-md">Global Standards</span>
-                 </div>
+                 <img src={UPLOADED_IMAGES[13]} alt="ICOM Standards Publication" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                </motion.div>
                <motion.div 
                  initial={{ opacity: 0, scale: 0.95 }}
                  whileInView={{ opacity: 1, scale: 1 }}
                  viewport={{ once: true }}
                  transition={{ delay: 0.4 }}
-                 className="col-span-1 rounded-[2rem] overflow-hidden shadow-2xl relative group bg-stone border border-white/10"
+                 className="col-span-1 rounded-[2rem] overflow-hidden shadow-2xl relative group bg-stone border border-whitesmoke/10"
                >
-                 <img src={UPLOADED_IMAGES[14]} alt="International Collaboration" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end p-5">
-                    <span className="text-white font-medium text-sm leading-tight drop-shadow-md">International Collaboration</span>
-                 </div>
+                 <img src={UPLOADED_IMAGES[14]} alt="International Collaboration Publication" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                </motion.div>
             </div>
           </div>
