@@ -104,6 +104,79 @@ export function About() {
         </div>
       </section>
 
+      {/* Core Brand Values Section as per Page 2 of ICOM Brand Guide */}
+      <section className="py-24 bg-stone relative overflow-hidden">
+        <div className="container mx-auto px-6 relative z-10">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <span className="inline-block py-1.5 px-4 rounded-full bg-earth-dark/10 border border-earth-dark/20 text-earth-dark text-xs font-bold tracking-widest uppercase mb-4">
+              Our Foundations
+            </span>
+            <h2 className="font-serif text-4xl md:text-5xl text-earth-dark mb-6">ICOM Core Values</h2>
+            <p className="text-earth-muted text-lg">
+              As defined in the ICOM Strategic Plan, these three core principles guide all our activities, standard-setting, and advocacy.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="bg-white rounded-[2rem] p-8 md:p-10 shadow-lg border border-earth-accent/10 flex flex-col justify-between"
+            >
+              <div>
+                <span className="text-earth-accent text-xs font-bold tracking-widest uppercase mb-4 block">VALUE 01</span>
+                <h3 className="font-serif text-3xl font-semibold text-earth-dark mb-6">Independence</h3>
+                <p className="text-earth-muted text-base leading-relaxed mb-6">
+                  ICOM is an independent worldwide membership organization comprised of individual and institutional members. As a non-governmental body (NGO), we work autonomously, free from biased political, financial, or other interests. This independence is a fundamental principle and our most valuable asset.
+                </p>
+              </div>
+              <div className="pt-6 border-t border-earth-accent/10 text-xs text-earth-accent font-bold tracking-widest uppercase mt-4">
+                Autonomy & Advocacy
+              </div>
+            </motion.div>
+
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="bg-white rounded-[2rem] p-8 md:p-10 shadow-lg border border-earth-accent/10 flex flex-col justify-between"
+            >
+              <div>
+                <span className="text-earth-accent text-xs font-bold tracking-widest uppercase mb-4 block">VALUE 02</span>
+                <h3 className="font-serif text-3xl font-semibold text-earth-dark mb-6">Integrity</h3>
+                <p className="text-earth-muted text-base leading-relaxed mb-6">
+                  ICOM conducts its business in accordance with its strict Code of Ethics. Our code represents our most influential and lasting contribution to regional and global museum professionalism, training, and practice, guiding cultural stewards in preserving tangible and intangible heritage.
+                </p>
+              </div>
+              <div className="pt-6 border-t border-earth-accent/10 text-xs text-earth-accent font-bold tracking-widest uppercase mt-4">
+                Ethical Standards
+              </div>
+            </motion.div>
+
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.4 }}
+              className="bg-white rounded-[2rem] p-8 md:p-10 shadow-lg border border-earth-accent/10 flex flex-col justify-between"
+            >
+              <div>
+                <span className="text-earth-accent text-xs font-bold tracking-widest uppercase mb-4 block">VALUE 03</span>
+                <h3 className="font-serif text-3xl font-semibold text-earth-dark mb-6">Professionalism</h3>
+                <p className="text-earth-muted text-base leading-relaxed mb-6">
+                  Through national and international committees, our Code of Ethics, and dedicated professional development, publications, and global conferences, ICOM supports museum professionalism in all its aspects, recognizing the growing practical scope of of cultural work.
+                </p>
+              </div>
+              <div className="pt-6 border-t border-earth-accent/10 text-xs text-earth-accent font-bold tracking-widest uppercase mt-4">
+                Development & Expertise
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
       {/* Our History, Significance & Digital Platform Section */}
       <section className="py-20 md:py-32 bg-white border-t border-earth-dark/10">
         <div className="container mx-auto px-6">

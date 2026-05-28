@@ -124,7 +124,7 @@ export function HeroDefi() {
     <div className="w-full h-[90vh] md:h-screen flex items-center justify-center p-3 md:p-5 bg-[#f0f0f0]">
       <section className="relative w-full max-w-[1536px] h-full rounded-[1.5rem] md:rounded-[3rem] overflow-hidden flex flex-col items-center bg-black/40 group">
         <img 
-          src="/hero-background.jpg" 
+          src="/hero-background.50.27 PM.jpeg" 
           alt="Hero Background"
           className="absolute inset-0 w-full h-full object-cover object-[65%] lg:object-center z-0 opacity-80 mix-blend-overlay"
         />

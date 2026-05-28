@@ -12,18 +12,18 @@
 }
 
 @theme {
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-serif: "Lora", "Playfair Display", ui-serif, Georgia, serif;
-  --font-helvetica: "Helvetica Regular", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Helvetica Neue", Arial, "Helvetica Regular", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: Georgia, "Playfair Display", "Lora", ui-serif, serif;
+  --font-helvetica: "Helvetica Neue", Arial, "Helvetica Regular", ui-sans-serif, system-ui, sans-serif;
   
   --color-warm-white: #FFFFFF; 
-  --color-earth-dark: #082f49;
-  --color-earth-accent: #0ea5e9;
-  --color-earth-muted: #0369a1;
-  --color-stone: #f0f9ff;
-  --color-woven-teal: #0284c7;
-  --color-woven-peach: #38bdf8;
-  --color-woven-beige: #e0f2fe;
+  --color-earth-dark: #003f90;       /* ICOM Pantone 287 (Deep Royal Blue / Monogram) */
+  --color-earth-accent: #7390c4;     /* ICOM Pantone 660 (Corporate Light Blue) */
+  --color-earth-muted: #4e6c9a;      /* Harmonious medium navy slate */
+  --color-stone: #ecf1f8;            /* Very light corporate slate-blue */
+  --color-woven-teal: #002554;       /* Safe dark contrast blue */
+  --color-woven-peach: #8da6d1;      /* Crisp brand accent slate */
+  --color-woven-beige: #f3f7fd;      /* Ambient branded soft background */
 }
 
 :root {
