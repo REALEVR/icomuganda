@@ -6,6 +6,7 @@ export function RegistrationPopup() {
   const [isOpen, setIsOpen] = useState(false);
   const [hasSubmitted, setHasSubmitted] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
+  const [submittedEmail, setSubmittedEmail] = useState('');
 
   // Auto-open after a delay
   useEffect(() => {
@@ -30,6 +31,8 @@ export function RegistrationPopup() {
     // Let's actually simulate the submission giving them a success UI.
     const form = e.currentTarget;
     const formData = new FormData(form);
+    const emailValue = formData.get('email') as string || '';
+    setSubmittedEmail(emailValue);
     
     // As the user requested, ideally this would forward to icomuganda@gmail.com
     // We are using a 3rd party service approach like Formsubmit or let it just simulate for preview.
@@ -131,7 +134,9 @@ export function RegistrationPopup() {
                       <Send className="w-8 h-8" />
                     </div>
                     <h4 className="font-serif text-2xl text-earth-dark mb-2">Thank you!</h4>
-                    <p className="text-earth-muted">You have successfully registered for updates. We'll be in touch soon at icomuganda@gmail.com.</p>
+                    <p className="text-earth-muted text-sm md:text-base leading-relaxed">
+                      Your update request from <strong className="text-earth-dark font-medium">{submittedEmail || 'your email'}</strong> was successfully registered and copied to <span className="font-medium text-earth-dark">icomuganda@gmail.com</span>. We'll be in touch soon!
+                    </p>
                   </motion.div>
                 ) : (
                   <>
