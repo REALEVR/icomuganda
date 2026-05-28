@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, MapPin, PlayCircle, ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowRight, MapPin, PlayCircle, ChevronLeft, ChevronRight, MessageCircle } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { SEO } from "../components/SEO";
 import photos from "../data/photos.json";
@@ -95,7 +95,7 @@ export function Home() {
                  transition={{ delay: 0.2 }}
                  className="col-span-1 rounded-[2rem] overflow-hidden shadow-2xl relative group bg-stone border border-white/10"
                >
-                 <img src={UPLOADED_IMAGES[11]} alt="ICOM Standards Workshop" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                 <img src={UPLOADED_IMAGES[13]} alt="ICOM Standards Workshop" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end p-5">
                     <span className="text-white font-medium text-sm leading-tight drop-shadow-md">Global Standards</span>
                  </div>
@@ -107,7 +107,7 @@ export function Home() {
                  transition={{ delay: 0.4 }}
                  className="col-span-1 rounded-[2rem] overflow-hidden shadow-2xl relative group bg-stone border border-white/10"
                >
-                 <img src={UPLOADED_IMAGES[12]} alt="International Collaboration" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                 <img src={UPLOADED_IMAGES[14]} alt="International Collaboration" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end p-5">
                     <span className="text-white font-medium text-sm leading-tight drop-shadow-md">International Collaboration</span>
                  </div>
@@ -327,69 +327,77 @@ export function Home() {
         </div>
       </section>
 
-      {/* Featured Gallery */}
+      {/* Curator's Shop Preview */}
       <section className="py-24 bg-warm-white border-t border-earth-dark/10">
         <div className="container mx-auto px-6">
           <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
             <div>
-              <h2 className="font-serif text-4xl md:text-5xl font-medium text-earth-dark mb-4">Captured Moments</h2>
-              <p className="text-earth-muted text-lg max-w-xl">A glimpse into the diverse collections and events across our network.</p>
+              <h2 className="font-serif text-4xl md:text-5xl font-medium text-earth-dark mb-4">Curator's Shop</h2>
+              <p className="text-earth-muted text-lg max-w-xl">Bring home a piece of history. Shop official ICOM merchandise and memorabilia.</p>
             </div>
-            <Link to="/media" className="hidden md:flex items-center gap-2 text-earth-accent uppercase tracking-widest text-sm font-semibold hover:opacity-80 transition-opacity">
-              View Full Gallery <ArrowRight className="w-4 h-4" />
+            <Link to="/shop" className="hidden md:flex items-center gap-2 text-earth-accent uppercase tracking-widest text-sm font-semibold hover:opacity-80 transition-opacity">
+              View Full Shop <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
           
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-            <Link 
-              to="/media" 
-              className="block relative group rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all col-span-2 lg:col-span-2 aspect-video"
-            >
-              <video src="/museumfair-2026.mp4.36.27 PM.mp4" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" autoPlay muted loop playsInline />
-              <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center pointer-events-none">
-                <span className="bg-white/20 backdrop-blur-md text-white px-4 py-2 rounded-full text-xs uppercase tracking-widest font-semibold flex items-center gap-2">
-                  Watch Video <ArrowRight className="w-3 h-3" />
-                </span>
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5 gap-6">
+            {[ 
+              {
+                id: 1,
+                name: "#MUSEUMFAIR2026 White T-Shirt",
+                type: "Apparel",
+                img: "/regenerated_image_1779968683074.jpg"
+              },
+              {
+                id: 2,
+                name: "#MUSEUMFAIR2026 Black T-Shirt",
+                type: "Apparel",
+                img: "/regenerated_image_1779968684237.jpg"
+              },
+              {
+                id: 3,
+                name: "ICOM Wooden Keychain",
+                type: "Accessories",
+                img: "/regenerated_image_1779968685565.jpg"
+              },
+              {
+                id: 4,
+                name: "ICOM Metallic Keychain",
+                type: "Accessories",
+                img: "/regenerated_image_1779968691127.jpg"
+              },
+              {
+                id: 5,
+                name: "ICOM Thermoflask",
+                type: "Drinkware",
+                img: "/regenerated_image_1779968692113.jpg"
+              }
+            ].map((item) => (
+              <div key={item.id} className="group bg-white rounded-3xl p-4 shadow-sm border border-stone hover:shadow-xl transition-all flex flex-col h-full cursor-pointer">
+                <div className="aspect-square rounded-2xl overflow-hidden bg-stone mb-4 relative">
+                  <img src={item.img} alt={item.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                  <div className="absolute top-2 left-2 bg-white/90 backdrop-blur-sm px-2 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-wider text-earth-dark">
+                    {item.type}
+                  </div>
+                </div>
+                <div className="flex flex-col flex-1">
+                  <h3 className="font-serif text-lg font-medium text-earth-dark leading-tight mb-4 flex-1">{item.name}</h3>
+                  <a 
+                    href={`https://wa.me/256704879520?text=${encodeURIComponent("I'm interested in purchasing the " + item.name + " from the Curator's Shop.")}`}
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="w-full py-2.5 rounded-xl border border-earth-dark text-earth-dark font-bold uppercase tracking-widest text-[10px] hover:bg-[#25D366] hover:border-[#25D366] hover:text-white transition-colors flex items-center justify-center gap-1.5"
+                  >
+                    <MessageCircle className="w-3.5 h-3.5" /> Inquire
+                  </a>
+                </div>
               </div>
-            </Link>
-            <Link 
-              to="/media" 
-              className="block relative group rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all col-span-1 lg:col-span-1 aspect-square lg:aspect-video"
-            >
-              <img src={img1Img} alt="Featured gallery" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-              <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center pointer-events-none">
-                <span className="bg-white/20 backdrop-blur-md text-white px-4 py-2 rounded-full text-xs uppercase tracking-widest font-semibold flex items-center gap-2">
-                  View Image <ArrowRight className="w-3 h-3" />
-                </span>
-              </div>
-            </Link>
-            <Link 
-              to="/media" 
-              className="block relative group rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all col-span-1 lg:col-span-1 aspect-square lg:aspect-video"
-            >
-              <img src={img2Img} alt="Featured gallery" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-              <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center pointer-events-none">
-                <span className="bg-white/20 backdrop-blur-md text-white px-4 py-2 rounded-full text-xs uppercase tracking-widest font-semibold flex items-center gap-2">
-                  View Image <ArrowRight className="w-3 h-3" />
-                </span>
-              </div>
-            </Link>
-            <Link 
-              to="/media" 
-              className="block relative group rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all col-span-2 lg:col-span-2 aspect-video"
-            >
-              <img src={uppcImg} alt="Featured gallery" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-              <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center pointer-events-none">
-                <span className="bg-white/20 backdrop-blur-md text-white px-4 py-2 rounded-full text-xs uppercase tracking-widest font-semibold flex items-center gap-2">
-                  View Image <ArrowRight className="w-3 h-3" />
-                </span>
-              </div>
-            </Link>
+            ))}
           </div>
           
           <div className="mt-8 flex justify-center md:hidden">
-            <Link to="/media" className="flex items-center gap-2 text-earth-dark border border-stone px-6 py-3 rounded-xl uppercase tracking-widest text-xs font-semibold hover:bg-stone transition-colors">
-              Browse Gallery
+            <Link to="/shop" className="flex items-center gap-2 text-earth-dark border border-stone px-6 py-3 rounded-xl uppercase tracking-widest text-xs font-semibold hover:bg-stone transition-colors">
+              Browse Curator's Shop
             </Link>
           </div>
         </div>

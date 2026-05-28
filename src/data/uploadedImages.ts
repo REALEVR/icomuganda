@@ -11,7 +11,9 @@ import img_10 from "../assets/images/regenerated_image_1778567215870.jpg";
 import img_11 from "../assets/images/regenerated_image_1778567221004.jpg";
 import img_12 from "../assets/images/regenerated_image_1778567222303.jpg";
 import img_13 from "../assets/images/regenerated_image_1778567223387.jpg";
+import img_14 from "../assets/images/user_upload_1.jpg";
+import img_15 from "../assets/images/user_upload_2.jpg";
 
 export const UPLOADED_IMAGES = [
-  img_1, img_2, img_3, img_4, img_5, img_6, img_7, img_8, img_9, img_10, img_11, img_12, img_13
+  img_1, img_2, img_3, img_4, img_5, img_6, img_7, img_8, img_9, img_10, img_11, img_12, img_13, img_14, img_15
 ];

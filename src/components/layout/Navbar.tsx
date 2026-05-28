@@ -13,7 +13,7 @@ const navLinks = [
   { name: "Museums", path: "/museums", color: "text-[#082f49]", hoverColor: "hover:text-[#082f49]", borderColor: "border-[#082f49]" },
   { name: "Virtual Tours", path: "/virtual-tours", color: "text-[#38bdf8]", hoverColor: "hover:text-[#38bdf8]", borderColor: "border-[#38bdf8]" },
   { name: "Play Game", path: "/game", color: "text-[#f59e0b]", hoverColor: "hover:text-[#f59e0b]", borderColor: "border-[#f59e0b]" },
-  { name: "Collection", path: "/collection", color: "text-[#0369a1]", hoverColor: "hover:text-[#0369a1]", borderColor: "border-[#0369a1]" },
+  { name: "Curator's Shop", path: "/shop", color: "text-[#0369a1]", hoverColor: "hover:text-[#0369a1]", borderColor: "border-[#0369a1]" },
   { name: "About", path: "/about", color: "text-[#0369a1]", hoverColor: "hover:text-[#0369a1]", borderColor: "border-[#0369a1]" },
   { name: "Contact", path: "/contact", color: "text-[#082f49]", hoverColor: "hover:text-[#082f49]", borderColor: "border-[#082f49]" },
 ];

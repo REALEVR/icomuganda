@@ -1,56 +1,43 @@
 import { SEO } from "../components/SEO";
 import { Link } from "react-router-dom";
-import { ShoppingBag, ArrowRight } from "lucide-react";
+import { ShoppingBag, ArrowRight, MessageCircle } from "lucide-react";
 
 export function Shop() {
   const shopItems = [
     {
       id: 1,
-      name: "ICOM Uganda Canvas Tote Bag",
-      price: "$25",
-      type: "Merchandise",
-      img: "https://images.unsplash.com/photo-1597423244037-519742d4a6ef?auto=format&fit=crop&q=80",
-      description: "Durable blank canvas tote featuring the official ICOM Uganda embroidered logo."
+      name: "#MUSEUMFAIR2026 White T-Shirt",
+      type: "Apparel",
+      img: "/regenerated_image_1779968683074.jpg",
+      description: "Premium white cotton t-shirt featuring the #MUSEUMFAIR2026 and ICOM Uganda branding."
     },
     {
       id: 2,
-      name: "Curator's Notebook & Pen Set",
-      price: "$18",
-      type: "Stationery",
-      img: "https://images.unsplash.com/photo-1531346878377-a541e4b1a4a4?auto=format&fit=crop&q=80",
-      description: "Premium acid-free paper notebook with a subtly embossed ICOM logo and a sleek bamboo pen."
+      name: "#MUSEUMFAIR2026 Black T-Shirt",
+      type: "Apparel",
+      img: "/regenerated_image_1779968684237.jpg",
+      description: "Elegant black cotton t-shirt featuring the #MUSEUMFAIR2026 and ICOM Uganda branding."
     },
     {
       id: 3,
-      name: "#MUSEUMFAIR2026 T-Shirt",
-      price: "$30",
-      type: "Apparel",
-      img: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&q=80",
-      description: "100% organic cotton tee with the ICOM emblem on the chest."
+      name: "ICOM Uganda Wooden Keychain",
+      type: "Accessories",
+      img: "/regenerated_image_1779968685565.jpg",
+      description: "Beautiful silver metallic keychain featuring an engraved wooden insert."
     },
     {
       id: 4,
-      name: "ICOM Ceramic Coffee Mug",
-      price: "$20",
-      type: "Ceramics",
-      img: "https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?auto=format&fit=crop&q=80",
-      description: "Minimalist ceramic mug clearly displaying the official ICOM print."
+      name: "ICOM Uganda Metallic Keychain",
+      type: "Accessories",
+      img: "/regenerated_image_1779968691127.jpg",
+      description: "Sleek metallic keychain engraved with the official ICOM Uganda letters."
     },
     {
       id: 5,
-      name: "ICOM Heritage Enamel Pin",
-      price: "$10",
-      type: "Accessories",
-      img: "https://images.unsplash.com/photo-1611078754160-59cbabce4302?auto=format&fit=crop&q=80",
-      description: "Collector's enamel pin crafted in the shape of the ICOM network emblem."
-    },
-    {
-      id: 6,
-      name: "ICOM Embroidered Cap",
-      price: "$22",
-      type: "Apparel",
-      img: "https://images.unsplash.com/photo-1588850561407-ed78c282e89b?auto=format&fit=crop&q=80",
-      description: "Classic adjustable baseball cap adorned with a high-definition ICOM Uganda logo embroidery."
+      name: "ICOM Thermoflask Water Bottle",
+      type: "Drinkware",
+      img: "/regenerated_image_1779968692113.jpg",
+      description: "Blue metallic thermoflask water bottle printed with ICOM Uganda and international council of museums."
     }
   ];
 
@@ -94,14 +81,18 @@ export function Shop() {
                 <div className="flex flex-col flex-1">
                   <div className="flex justify-between items-start mb-2">
                     <h3 className="font-serif text-xl font-medium text-earth-dark pr-4">{item.name}</h3>
-                    <span className="text-earth-accent font-bold text-lg">{item.price}</span>
                   </div>
                   <p className="text-earth-muted text-sm leading-relaxed mb-6 flex-1">
                     {item.description}
                   </p>
-                  <button className="w-full py-3 md:py-4 rounded-xl border border-earth-dark text-earth-dark font-bold uppercase tracking-widest text-xs hover:bg-earth-dark hover:text-white transition-colors flex items-center justify-center gap-2 group-hover:bg-earth-dark group-hover:text-white">
-                    <ShoppingBag className="w-4 h-4" /> Add to Cart
-                  </button>
+                  <a 
+                    href={`https://wa.me/256704879520?text=${encodeURIComponent("I'm interested in purchasing the " + item.name + " from the Curator's Shop.")}`}
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="w-full py-3 md:py-4 rounded-xl border border-earth-dark text-earth-dark font-bold uppercase tracking-widest text-xs hover:bg-[#25D366] hover:border-[#25D366] hover:text-white transition-colors flex items-center justify-center gap-2"
+                  >
+                    <MessageCircle className="w-4 h-4" /> Inquire on WhatsApp
+                  </a>
                 </div>
               </div>
             ))}

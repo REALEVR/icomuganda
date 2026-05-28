@@ -58,7 +58,10 @@ export function Contact() {
                     </div>
                     <div>
                       <h4 className="font-bold text-earth-dark uppercase tracking-widest text-sm mb-1">Call Us</h4>
-                      <p className="text-earth-muted">+256 000 000 000</p>
+                      <p className="text-earth-muted">
+                        +256 704 879 520<br />
+                        +256 752 499 606
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -69,14 +72,14 @@ export function Contact() {
                  <h3 className="text-2xl text-earth-dark mb-6">Location Map</h3>
                  <div className="aspect-video w-full rounded-2xl overflow-hidden bg-earth-dark/5 shadow-inner">
                     <iframe 
-                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15958.989218206148!2d32.57398184650566!3d0.33400329437937403!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x177dbb0e8c0e7ced%3A0xc6ad50bd65147513!2sUganda%20Museum!5e0!3m2!1sen!2sug!4v1716943894220!5m2!1sen!2sug" 
+                      src="https://maps.google.com/maps?q=Wandegeya,%20Kampala,%20Uganda&t=&z=15&ie=UTF8&iwloc=&output=embed" 
                       width="100%" 
                       height="100%" 
                       style={{ border: 0 }} 
                       allowFullScreen 
                       loading="lazy" 
                       referrerPolicy="no-referrer-when-downgrade"
-                      title="ICOM Uganda Location"
+                      title="ICOM Uganda Location - Wandegeya"
                     ></iframe>
                  </div>
               </div>

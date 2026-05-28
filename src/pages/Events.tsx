@@ -1,4 +1,4 @@
-import { Calendar, MapPin, ExternalLink, History } from "lucide-react";
+import { Calendar, MapPin, ExternalLink, History, Youtube } from "lucide-react";
 import { SEO } from "../components/SEO";
 
 export function Events() {
@@ -70,6 +70,31 @@ export function Events() {
       <div className="container mx-auto max-w-5xl">
         <h1 className="font-serif text-5xl md:text-7xl font-semibold text-earth-dark mb-6">Events & Exhibitions</h1>
         <p className="text-xl text-earth-muted mb-16 max-w-2xl">Stay updated on our cultural gatherings, international observances, and museum fairs across Uganda.</p>
+
+        <section className="mb-20">
+          <div className="bg-earth-dark rounded-[40px] p-8 md:p-12 shadow-xl border border-white/10 relative overflow-hidden text-warm-white">
+            <div className="absolute top-0 right-0 p-8 opacity-10">
+              <Youtube className="w-64 h-64" />
+            </div>
+            <div className="relative z-10">
+              <div className="flex items-center gap-4 mb-6">
+                <Youtube className="w-8 h-8 text-earth-accent" />
+                <h2 className="font-serif text-3xl text-warm-white">Digital Showroom & Lives</h2>
+              </div>
+              <p className="text-warm-white/80 text-lg md:text-xl max-w-2xl mb-8 leading-relaxed">
+                Join us on YouTube for live events, panel discussions, and digital archives of our cultural showcases. Experience the richness of Uganda's heritage from anywhere in the world.
+              </p>
+              <a 
+                href="https://www.youtube.com/@icomuganda2536" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 bg-earth-accent text-white px-8 py-4 rounded-full font-bold uppercase tracking-widest text-sm hover:bg-earth-accent/90 transition-colors"
+              >
+                Visit Our Channel <ExternalLink className="w-4 h-4" />
+              </a>
+            </div>
+          </div>
+        </section>
 
         <section className="mb-20">
           <div className="flex items-center gap-4 mb-10 pb-4 border-b border-earth-dark/10">
