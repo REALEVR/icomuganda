@@ -7,6 +7,7 @@ import { MemberDashboard } from "../MemberDashboard";
 import { useEffect, useState } from "react";
 import { User } from 'firebase/auth';
 import { initAuth } from "../../lib/auth";
+import { isNetworkAdmin } from "../../lib/admin";
 
 export function Layout() {
   const [user, setUser] = useState<User | null>(null);
@@ -25,7 +26,7 @@ export function Layout() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <Navbar />
+      <Navbar user={user} isAdmin={isNetworkAdmin(user)} />
       <main className="flex-1 pt-[90px]">
         <Outlet />
       </main>

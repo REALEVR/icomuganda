@@ -1,6 +1,7 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Menu, X, Globe, User } from "lucide-react";
+import { Menu, X, ShieldCheck } from "lucide-react";
 import React, { useState, useEffect, useRef } from "react";
+import { User } from "firebase/auth";
 import icomLogo from "../../assets/images/regenerated_image_1778567215870.jpg";
 import { cn } from "@/src/lib/utils";
 import { motion, AnimatePresence } from "motion/react";
@@ -10,7 +11,7 @@ import { useGSAP } from "@gsap/react";
 const navLinks = [
   { name: "Plan your visit", path: "/visit", color: "text-[#0ea5e9]", hoverColor: "hover:text-[#0ea5e9]", borderColor: "border-[#0ea5e9]" },
   { name: "What's on", path: "/whats-on", color: "text-[#0284c7]", hoverColor: "hover:text-[#0284c7]", borderColor: "border-[#0284c7]" },
-  { name: "Museums", path: "/museums", color: "text-[#082f49]", hoverColor: "hover:text-[#082f49]", borderColor: "border-[#082f49]" },
+  { name: "Museum Network", path: "/museums", color: "text-[#082f49]", hoverColor: "hover:text-[#082f49]", borderColor: "border-[#082f49]" },
   { name: "Virtual Tours", path: "/virtual-tours", color: "text-[#38bdf8]", hoverColor: "hover:text-[#38bdf8]", borderColor: "border-[#38bdf8]" },
   { name: "Play Game", path: "/game", color: "text-[#f59e0b]", hoverColor: "hover:text-[#f59e0b]", borderColor: "border-[#f59e0b]" },
   { name: "Curator's Shop", path: "/shop", color: "text-[#0369a1]", hoverColor: "hover:text-[#0369a1]", borderColor: "border-[#0369a1]" },
@@ -18,7 +19,7 @@ const navLinks = [
   { name: "Contact", path: "/contact", color: "text-[#082f49]", hoverColor: "hover:text-[#082f49]", borderColor: "border-[#082f49]" },
 ];
 
-export function Navbar() {
+export function Navbar({ isAdmin }: { user?: User | null; isAdmin?: boolean } = {}) {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
@@ -148,6 +149,20 @@ export function Navbar() {
           >
             Membership
           </Link>
+          {isAdmin && (
+            <Link
+              to="/admin/museums"
+              className="inline-flex items-center gap-1.5 text-xs uppercase tracking-widest font-semibold transition-colors hover:text-earth-accent text-earth-dark"
+            >
+              <ShieldCheck className="w-3.5 h-3.5" /> Admin
+            </Link>
+          )}
+          <Link
+            to="/join-network"
+            className="px-6 py-2 border border-earth-dark text-earth-dark text-xs font-semibold tracking-widest uppercase rounded-full hover:bg-earth-dark hover:text-white transition-colors"
+          >
+            Register Your Museum
+          </Link>
           <Link
             to="/donate"
             className="px-6 py-2 bg-earth-accent text-white text-xs font-semibold tracking-widest uppercase rounded-full hover:bg-earth-accent/80 transition-colors shadow-sm"
@@ -199,6 +214,22 @@ export function Navbar() {
               >
                 Membership
               </Link>
+              <Link
+                to="/join-network"
+                onClick={() => setIsOpen(false)}
+                className="text-lg font-serif text-earth-dark"
+              >
+                Register Your Museum
+              </Link>
+              {isAdmin && (
+                <Link
+                  to="/admin/museums"
+                  onClick={() => setIsOpen(false)}
+                  className="text-lg font-serif text-earth-dark inline-flex items-center gap-2"
+                >
+                  <ShieldCheck className="w-4 h-4" /> Admin
+                </Link>
+              )}
               <Link
                 to="/donate"
                 onClick={() => setIsOpen(false)}

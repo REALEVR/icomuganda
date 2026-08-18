@@ -17,6 +17,7 @@ import { ChatFeedback } from "../components/ChatFeedback";
 import { MUSEUMS_DATA } from "../data/museums";
 import { UPLOADED_IMAGES } from "../data/uploadedImages";
 import { HeroDefi } from "../components/HeroDefi";
+import { NetworkSection } from "../components/NetworkSection";
 
 export function Home() {
   const organizationSchema = {
@@ -213,6 +214,9 @@ export function Home() {
           </div>
         </div>
       </section>
+
+      {/* East African Museum Network */}
+      <NetworkSection />
 
       {/* Participating Museums & Partners */}
       <section className="py-16 md:py-24 bg-white border-b border-earth-dark/10 overflow-hidden">

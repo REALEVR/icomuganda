@@ -35,12 +35,12 @@ export function Footer() {
           </div>
 
           <div>
-            <h3 className="uppercase tracking-widest text-xs font-semibold text-earth-dark mb-6">Platform</h3>
+            <h3 className="uppercase tracking-widest text-xs font-semibold text-earth-dark mb-6">Museum Network</h3>
             <ul className="flex flex-col gap-3 text-sm">
               <li><Link to="/about" className="hover:text-earth-accent transition-colors">About ICOM Uganda</Link></li>
-              <li><Link to="/museums" className="hover:text-earth-accent transition-colors">Museums Directory</Link></li>
+              <li><Link to="/museums" className="hover:text-earth-accent transition-colors">Network Directory</Link></li>
+              <li><Link to="/join-network" className="hover:text-earth-accent transition-colors">Register Your Museum</Link></li>
               <li><Link to="/virtual-tours" className="hover:text-earth-accent transition-colors">Virtual Tours</Link></li>
-              <li><Link to="/collections" className="hover:text-earth-accent transition-colors">Digital Collections</Link></li>
               <li><Link to="/news" className="hover:text-earth-accent transition-colors">News & Publications</Link></li>
             </ul>
           </div>
@@ -50,7 +50,6 @@ export function Footer() {
             <ul className="flex flex-col gap-3 text-sm">
               <li><Link to="/membership" className="hover:text-earth-accent transition-colors">Membership Portal</Link></li>
               <li><Link to="/donate" className="hover:text-earth-accent transition-colors">Support & Donate</Link></li>
-              <li><Link to="/partners" className="hover:text-earth-accent transition-colors">Partners & Sponsors</Link></li>
               <li><Link to="/contact" className="hover:text-earth-accent transition-colors">Contact Us</Link></li>
             </ul>
           </div>
