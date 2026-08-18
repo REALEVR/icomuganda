@@ -1,6 +1,7 @@
+import { useMemo, useState } from "react";
 import { SEO } from "../components/SEO";
 import { Link } from "react-router-dom";
-import { ShoppingBag, ArrowRight, MessageCircle } from "lucide-react";
+import { ArrowRight, MessageCircle } from "lucide-react";
 
 export function Shop() {
   const shopItems = [
@@ -41,6 +42,10 @@ export function Shop() {
     }
   ];
 
+  const [activeType, setActiveType] = useState("All");
+  const types = useMemo(() => ["All", ...Array.from(new Set(shopItems.map((i) => i.type)))], []);
+  const filteredItems = activeType === "All" ? shopItems : shopItems.filter((i) => i.type === activeType);
+
   return (
     <div className="flex flex-col min-h-screen bg-warm-white">
       <SEO 
@@ -62,15 +67,29 @@ export function Shop() {
       {/* Products Grid */}
       <section className="py-24">
         <div className="container mx-auto px-6">
-          <div className="flex items-center justify-between mb-12">
-            <h2 className="text-2xl font-serif text-earth-dark">All Items ({shopItems.length})</h2>
-            <div className="flex gap-4">
-              <span className="text-sm font-semibold tracking-widest uppercase text-earth-muted">Filter: All</span>
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-12">
+            <h2 className="text-2xl font-serif text-earth-dark">
+              {activeType === "All" ? "All Items" : activeType} ({filteredItems.length})
+            </h2>
+            <div className="flex gap-2 flex-wrap">
+              {types.map((type) => (
+                <button
+                  key={type}
+                  onClick={() => setActiveType(type)}
+                  className={`px-4 py-2 rounded-full border font-medium text-sm transition-colors ${
+                    activeType === type
+                      ? "bg-earth-dark border-earth-dark text-white"
+                      : "border-earth-dark/10 bg-white text-earth-dark hover:bg-earth-dark/5"
+                  }`}
+                >
+                  {type}
+                </button>
+              ))}
             </div>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-            {shopItems.map((item) => (
+            {filteredItems.map((item) => (
               <div key={item.id} className="group bg-white rounded-3xl p-6 shadow-sm border border-stone hover:shadow-xl transition-all flex flex-col h-full cursor-pointer">
                 <div className="aspect-square rounded-2xl overflow-hidden bg-stone mb-6 relative">
                   <img src={item.img} alt={item.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
