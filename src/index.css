@@ -15,8 +15,8 @@
   --font-sans: "Helvetica Neue", Arial, "Helvetica Regular", ui-sans-serif, system-ui, sans-serif;
   --font-serif: Georgia, "Playfair Display", "Lora", ui-serif, serif;
   --font-helvetica: "Helvetica Neue", Arial, "Helvetica Regular", ui-sans-serif, system-ui, sans-serif;
-  
-  --color-warm-white: #FFFFFF; 
+
+  --color-warm-white: #FFFFFF;
   --color-earth-dark: #003f90;       /* ICOM Pantone 287 (Deep Royal Blue / Monogram) */
   --color-earth-accent: #7390c4;     /* ICOM Pantone 660 (Corporate Light Blue) */
   --color-earth-muted: #4e6c9a;      /* Harmonious medium navy slate */
@@ -24,10 +24,19 @@
   --color-woven-teal: #002554;       /* Safe dark contrast blue */
   --color-woven-peach: #8da6d1;      /* Crisp brand accent slate */
   --color-woven-beige: #f3f7fd;      /* Ambient branded soft background */
+  --color-gold: #c9a24b;             /* Reserved premium accent — sparing use only (badges, dividers) */
+
+  --shadow-card: 0 1px 2px rgba(0,31,74,0.04), 0 8px 24px -8px rgba(0,31,74,0.12);
+  --shadow-card-hover: 0 4px 12px rgba(0,31,74,0.08), 0 24px 48px -16px rgba(0,31,74,0.22);
+  --shadow-lift: 0 20px 60px -20px rgba(0,31,74,0.35);
 }
 
 :root {
   font-family: var(--font-helvetica);
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 html, body {
@@ -37,6 +46,28 @@ html, body {
   @apply text-earth-dark relative;
 }
 
+::selection {
+  background-color: var(--color-earth-dark);
+  color: var(--color-warm-white);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-earth-accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Slim, unobtrusive scrollbar that still reads as intentional */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--color-earth-dark) 25%, transparent);
+  border-radius: 999px;
+  border: 2px solid #f0f0f0;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: color-mix(in srgb, var(--color-earth-dark) 45%, transparent);
+}
 
 body::before {
   content: "";
@@ -44,10 +75,10 @@ body::before {
   inset: 0;
   pointer-events: none;
   z-index: 0;
-  opacity: 0.05;
-  /* Subtle geometric subtle texture */
-  background-image: 
-    linear-gradient(45deg, var(--color-earth-muted) 25%, transparent 25%, transparent 75%, var(--color-earth-muted) 75%, var(--color-earth-muted)), 
+  opacity: 0.035;
+  /* Subtle geometric texture — kept faint so it reads as paper grain, not pattern */
+  background-image:
+    linear-gradient(45deg, var(--color-earth-muted) 25%, transparent 25%, transparent 75%, var(--color-earth-muted) 75%, var(--color-earth-muted)),
     linear-gradient(45deg, var(--color-earth-muted) 25%, transparent 25%, transparent 75%, var(--color-earth-muted) 75%, var(--color-earth-muted));
   background-size: 60px 60px;
   background-position: 0 0, 30px 30px;
@@ -67,5 +98,58 @@ h1, h2, h3, h4, h5, h6 {
     var(--color-earth-accent) 40px, var(--color-earth-accent) 60px,
     var(--color-earth-dark) 60px, var(--color-earth-dark) 80px
   );
+}
+
+/* Reusable "top-end" primitives — new/redesigned sections should reach for
+   these instead of hand-rolling one-off button/card styles, so the site
+   reads as one consistent system as more pages get redesigned. */
+.btn-primary, .btn-accent, .btn-outline {
+  @apply inline-flex items-center justify-center gap-2 rounded-full font-bold uppercase tracking-widest text-xs transition-all duration-300 px-8 py-4;
+}
+.btn-primary {
+  @apply text-white shadow-lg;
+  background-color: var(--color-earth-dark);
+}
+.btn-primary:hover {
+  background-color: var(--color-woven-teal);
+  box-shadow: var(--shadow-lift);
+  transform: translateY(-1px);
+}
+.btn-accent {
+  @apply text-white shadow-lg;
+  background-color: var(--color-earth-accent);
+}
+.btn-accent:hover {
+  background-color: var(--color-earth-dark);
+  transform: translateY(-1px);
+}
+.btn-outline {
+  @apply border bg-transparent;
+  border-color: var(--color-earth-dark);
+  color: var(--color-earth-dark);
+}
+.btn-outline:hover {
+  background-color: var(--color-earth-dark);
+  color: white;
+}
+
+.card-surface {
+  @apply bg-white rounded-3xl border transition-all duration-300;
+  border-color: var(--color-stone);
+  box-shadow: var(--shadow-card);
+}
+.card-surface:hover {
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-2px);
+}
+
+.eyebrow {
+  @apply inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em];
+}
+
+.section-divider {
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--color-earth-dark) 15%, transparent), transparent);
 }
 

@@ -95,7 +95,8 @@ export function Navbar({ isAdmin }: { user?: User | null; isAdmin?: boolean } = 
     <>
       <header
         className={cn(
-          "fixed top-[6px] inset-x-0 z-50 transition-all duration-300 bg-white/95 backdrop-blur-md shadow-sm py-4",
+          "fixed top-[6px] inset-x-0 z-50 transition-all duration-300 bg-white/95 backdrop-blur-md py-4",
+          scrolled ? "shadow-[0_1px_2px_rgba(0,31,74,0.04),0_8px_24px_-8px_rgba(0,31,74,0.12)]" : "shadow-sm",
           activeLink ? `border-b-4 ${activeLink.borderColor}` : "border-b border-earth-dark/10"
         )}
       >
