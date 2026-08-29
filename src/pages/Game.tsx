@@ -209,18 +209,28 @@ export function Game() {
               </div>
             ) : gameOver ? (
               <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="bg-white rounded-3xl p-12 shadow-xl border border-stone w-full">
-                 <h2 className="text-4xl font-serif text-earth-dark mb-4">Game Over!</h2>
-                 <p className="text-earth-muted text-lg mb-8">You have viewed all the museums. Check back later for new ones!</p>
+                 <Trophy className="w-12 h-12 text-earth-accent mx-auto mb-4" />
+                 <h2 className="text-4xl font-serif text-earth-dark mb-2">Game Over!</h2>
+                 <p className="text-earth-muted text-lg mb-2">You have viewed all the museums. Check back later for new ones!</p>
+                 <p className="font-black text-3xl text-earth-dark mb-8">Final Score: <span className="text-earth-accent">{score}</span></p>
                  <button onClick={resetGame} className="px-8 py-4 bg-earth-accent text-white rounded-full font-semibold hover:bg-earth-accent/90 transition-all text-lg">
                    Play Again
                  </button>
               </motion.div>
             ) : (
               <motion.div key={currentQuestionIdx} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="w-full bg-white p-6 md:p-8 rounded-3xl shadow-xl border border-stone">
-                 <div className="text-left mb-4 text-sm font-semibold tracking-widest uppercase text-earth-muted">
-                    Museum {currentQuestionIdx + 1} of {questions.length}
+                 <div className="flex items-center justify-between mb-2 text-sm font-semibold tracking-widest uppercase text-earth-muted">
+                    <span>Museum {currentQuestionIdx + 1} of {questions.length}</span>
                  </div>
-                 
+                 <div className="w-full h-1.5 bg-stone rounded-full mb-6 overflow-hidden">
+                    <motion.div
+                      className="h-full bg-earth-accent rounded-full"
+                      initial={{ width: 0 }}
+                      animate={{ width: `${((currentQuestionIdx + 1) / questions.length) * 100}%` }}
+                      transition={{ duration: 0.4, ease: "easeOut" }}
+                    />
+                 </div>
+
                  <div className="relative aspect-video w-full rounded-2xl overflow-hidden mb-8 bg-stone">
                     <img src={questions[currentQuestionIdx]?.imageUrl} alt="Guess the museum" className="w-full h-full object-cover" />
                     
