@@ -1,14 +1,52 @@
+import { useState } from "react";
 import { Calendar, User } from "lucide-react";
 import { SEO } from "../components/SEO";
 
 const MOCK_NEWS = [
-  { id: 1, title: "ICOM Uganda Launches Digital Heritage Platform", date: "Oct 15, 2024", author: "Admin", category: "Press Release", img: "/icom-logo.png" },
-  { id: 2, title: "Conservation Workshop: Restoring Ancient Bark Cloth", date: "Oct 10, 2024", author: "Dr. Jane Doe", category: "Conservation", img: "https://upload.wikimedia.org/wikipedia/commons/a/a2/International_Council_of_Museums_%28ICOM%29_-_Flickr_-_Al_Jazeera_English.jpg" },
-  { id: 3, title: "New Virtual Exhibit: Museum Fair 2026", date: "Oct 05, 2024", author: "Tech Team", category: "Virtual Tours", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/The_Uganda_Museum_Main_Entrance.JPG/1280px-The_Uganda_Museum_Main_Entrance.JPG" },
-  { id: 4, title: "Annual General Meeting 2024 Conclusions", date: "Sep 28, 2024", author: "Secretariat", category: "Updates", img: "https://upload.wikimedia.org/wikipedia/commons/4/4e/Flag_of_Uganda.svg" }
+  {
+    id: 1,
+    title: "ICOM Uganda Launches Digital Heritage Platform",
+    date: "Oct 15, 2024",
+    author: "Admin",
+    category: "Press",
+    img: "/icom-logo.png",
+    excerpt: "ICOM Uganda unveils a new digital platform bringing member museums, virtual tours, and the national heritage archive together in one place, online and free to access.",
+  },
+  {
+    id: 2,
+    title: "Conservation Workshop: Restoring Ancient Bark Cloth",
+    date: "Oct 10, 2024",
+    author: "Dr. Jane Doe",
+    category: "Conservation",
+    img: "https://upload.wikimedia.org/wikipedia/commons/a/a2/International_Council_of_Museums_%28ICOM%29_-_Flickr_-_Al_Jazeera_English.jpg",
+    excerpt: "A three-day hands-on workshop trained regional curators in traditional and modern techniques for stabilising and restoring Uganda's UNESCO-recognised bark cloth artifacts.",
+  },
+  {
+    id: 3,
+    title: "New Virtual Exhibit: Museum Fair 2026",
+    date: "Oct 05, 2024",
+    author: "Tech Team",
+    category: "Press",
+    img: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/The_Uganda_Museum_Main_Entrance.JPG/1280px-The_Uganda_Museum_Main_Entrance.JPG",
+    excerpt: "A first look at the immersive 360° exhibit being built for Museum Fair 2026, letting visitors anywhere in the world walk through \"Woven in Time\" before doors open.",
+  },
+  {
+    id: 4,
+    title: "Annual General Meeting 2024 Conclusions",
+    date: "Sep 28, 2024",
+    author: "Secretariat",
+    category: "Research",
+    img: "https://upload.wikimedia.org/wikipedia/commons/4/4e/Flag_of_Uganda.svg",
+    excerpt: "Members convened to review the year's conservation grants, elect new committee representatives, and set priorities for the East African Museum Network's launch.",
+  }
 ];
 
+const CATEGORIES = ["All", "Press", "Conservation", "Research"];
+
 export function News() {
+  const [activeCategory, setActiveCategory] = useState("All");
+  const filteredNews = activeCategory === "All" ? MOCK_NEWS : MOCK_NEWS.filter((n) => n.category === activeCategory);
+
   const newsSchema = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
@@ -97,32 +135,46 @@ export function News() {
             <h1 className="font-serif text-5xl md:text-6xl font-medium text-earth-dark mb-4">News & Publications</h1>
             <p className="text-lg text-earth-muted max-w-2xl">Read stories, research, and updates straight from the heart of Uganda's museum institutions.</p>
           </div>
-          <div className="flex gap-2">
-            {["All", "Press", "Conservation", "Research"].map(tab => (
-              <button key={tab} className="px-4 py-2 rounded-full border border-earth-dark/10 bg-white font-medium text-earth-dark text-sm hover:bg-earth-dark/5 transition-colors">
+          <div className="flex gap-2 flex-wrap">
+            {CATEGORIES.map(tab => (
+              <button
+                key={tab}
+                onClick={() => setActiveCategory(tab)}
+                className={`px-4 py-2 rounded-full border font-medium text-sm transition-colors ${
+                  activeCategory === tab
+                    ? "bg-earth-dark border-earth-dark text-white"
+                    : "border-earth-dark/10 bg-white text-earth-dark hover:bg-earth-dark/5"
+                }`}
+              >
                 {tab}
               </button>
             ))}
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-16">
-          {MOCK_NEWS.map((item, idx) => (
-            <article key={item.id} className="group cursor-pointer">
-              <div className="aspect-video w-full overflow-hidden rounded-3xl bg-stone mb-6">
-                <img src={item.img} alt={item.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-              </div>
-              <div className="flex items-center gap-4 text-xs font-bold uppercase tracking-widest text-earth-muted mb-4">
-                <span className="text-earth-accent">{item.category}</span>
-                <span className="w-1 h-1 rounded-full bg-earth-dark/30" />
-                <span className="flex items-center gap-1.5"><Calendar className="w-3.5 h-3.5" /> {item.date}</span>
-              </div>
-              <h2 className="font-serif text-3xl font-medium text-earth-dark mb-3 group-hover:text-earth-accent transition-colors">{item.title}</h2>
-              <p className="text-earth-dark/70 mb-4 line-clamp-2">Amet consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
-              <span className="inline-flex font-medium text-sm border-b-2 border-transparent hover:border-earth-dark transition-colors">Read Article</span>
-            </article>
-          ))}
-        </div>
+        {filteredNews.length === 0 ? (
+          <p className="text-earth-muted text-center py-16">No articles in this category yet.</p>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-16">
+            {filteredNews.map((item) => (
+              <article key={item.id} className="group cursor-pointer">
+                <div className="aspect-video w-full overflow-hidden rounded-3xl bg-stone mb-6">
+                  <img src={item.img} alt={item.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                </div>
+                <div className="flex items-center gap-4 text-xs font-bold uppercase tracking-widest text-earth-muted mb-4 flex-wrap">
+                  <span className="text-earth-accent">{item.category}</span>
+                  <span className="w-1 h-1 rounded-full bg-earth-dark/30" />
+                  <span className="flex items-center gap-1.5"><Calendar className="w-3.5 h-3.5" /> {item.date}</span>
+                  <span className="w-1 h-1 rounded-full bg-earth-dark/30" />
+                  <span className="flex items-center gap-1.5"><User className="w-3.5 h-3.5" /> {item.author}</span>
+                </div>
+                <h2 className="font-serif text-3xl font-medium text-earth-dark mb-3 group-hover:text-earth-accent transition-colors">{item.title}</h2>
+                <p className="text-earth-dark/70 mb-4 line-clamp-2">{item.excerpt}</p>
+                <span className="inline-flex font-medium text-sm border-b-2 border-transparent hover:border-earth-dark transition-colors">Read Article</span>
+              </article>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

@@ -21,11 +21,11 @@ export function About() {
             transition={{ duration: 0.8 }}
             className="max-w-4xl"
           >
-            <span className="inline-block py-1 px-3 rounded-full bg-earth-accent/20 border border-earth-accent/50 text-earth-accent-light text-sm font-semibold tracking-widest mb-6">
-              WHO WE ARE
+            <span className="eyebrow py-1.5 px-4 rounded-full bg-white/10 border border-white/20 text-white mb-6">
+              Who We Are
             </span>
             <h1 className="font-serif text-5xl md:text-7xl font-bold mb-6 leading-tight">
-              Preserving Our Heritage. <br /><span className="text-earth-cream">Uniting Our World.</span>
+              Preserving Our Heritage. <br /><span className="text-earth-accent">Uniting Our World.</span>
             </h1>
             <p className="text-lg md:text-xl text-white/90 max-w-2xl font-light leading-relaxed">
               The International Council of Museums (ICOM) Uganda is the official National Committee dedicated to advancing the mission of preserving, protecting, and promoting both tangible and intangible cultural heritage.
@@ -108,7 +108,7 @@ export function About() {
       <section className="py-24 bg-stone relative overflow-hidden">
         <div className="container mx-auto px-6 relative z-10">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <span className="inline-block py-1.5 px-4 rounded-full bg-earth-dark/10 border border-earth-dark/20 text-earth-dark text-xs font-bold tracking-widest uppercase mb-4">
+            <span className="eyebrow py-1.5 px-4 rounded-full bg-earth-dark/10 border border-earth-dark/20 text-earth-dark mb-4">
               Our Foundations
             </span>
             <h2 className="font-serif text-4xl md:text-5xl text-earth-dark mb-6">ICOM Core Values</h2>
@@ -238,7 +238,7 @@ export function About() {
               <div className="absolute top-[-20%] right-[-10%] w-[300px] h-[300px] bg-woven-teal/30 rounded-full filter blur-[80px]"></div>
               
               <div className="relative z-10">
-                <span className="inline-block py-1.5 px-4 rounded-full bg-white/10 border border-white/20 text-white text-xs font-bold tracking-widest uppercase mb-6 backdrop-blur-md">
+                <span className="eyebrow py-1.5 px-4 rounded-full bg-white/10 border border-white/20 text-white mb-6 backdrop-blur-md">
                   Our Digital Presence
                 </span>
                 <h2 className="font-serif text-3xl md:text-5xl mb-6 leading-tight">The ICOM Uganda <br className="hidden md:block"/>Digital Platform</h2>
@@ -259,7 +259,7 @@ export function About() {
       <section className="py-24 bg-stone/30 border-y border-stone relative overflow-hidden">
         <div className="container mx-auto px-6">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <span className="inline-block py-1 px-3 rounded-full bg-earth-accent/10 border border-earth-accent/20 text-earth-accent text-sm font-bold tracking-widest uppercase mb-4">
+            <span className="eyebrow py-1.5 px-4 rounded-full bg-earth-accent/10 border border-earth-accent/20 text-earth-accent mb-4">
               The Flagship Event
             </span>
             <h2 className="font-serif text-4xl md:text-5xl text-earth-dark mb-6">Museum Fair 2026</h2>
@@ -303,7 +303,7 @@ export function About() {
             <div className="space-y-8">
               <div className="bg-earth-dark text-white rounded-3xl p-8 shadow-xl">
                 <h4 className="font-bold text-xl mb-4">IMD 2026 Theme</h4>
-                <blockquote className="font-serif text-2xl italic text-earth-cream mb-4">
+                <blockquote className="font-serif text-2xl italic text-earth-accent mb-4">
                   "Museums Uniting a Divided World"
                 </blockquote>
                 <p className="text-white/80 text-sm">

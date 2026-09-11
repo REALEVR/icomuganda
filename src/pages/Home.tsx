@@ -14,9 +14,10 @@ import uraMuseumImg from "../assets/images/ura-museum.jpg";
 import uppcImg from "../assets/images/uppc.jpg";
 import imdPoster from "../assets/images/imd-poster.jpg";
 import { ChatFeedback } from "../components/ChatFeedback";
-import { MUSEUMS_DATA } from "../data/museums";
+import { MUSEUMS_DATA, EAST_AFRICAN_COUNTRIES } from "../data/museums";
 import { UPLOADED_IMAGES } from "../data/uploadedImages";
 import { HeroDefi } from "../components/HeroDefi";
+import { NetworkSection } from "../components/NetworkSection";
 
 export function Home() {
   const organizationSchema = {
@@ -46,6 +47,25 @@ export function Home() {
       
       {/* Hero Section */}
       <HeroDefi />
+
+      {/* Trust Bar */}
+      <section className="bg-white border-b border-earth-dark/10 py-10">
+        <div className="container mx-auto px-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-4 text-center">
+            {[
+              { value: `${MUSEUMS_DATA.length}+`, label: "Founding Museums" },
+              { value: `${EAST_AFRICAN_COUNTRIES.length}`, label: "Countries Open to Join" },
+              { value: "360°", label: "Virtual Tour Access" },
+              { value: "2026", label: "Active Network" },
+            ].map((stat) => (
+              <div key={stat.label} className="flex flex-col items-center">
+                <span className="font-serif text-3xl md:text-4xl font-semibold text-earth-dark">{stat.value}</span>
+                <span className="text-[11px] uppercase tracking-widest text-earth-muted mt-1">{stat.label}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* ICOM About & Membership Section */}
       <section id="membership-section" className="py-24 bg-earth-dark text-warm-white relative overflow-hidden">
@@ -213,6 +233,9 @@ export function Home() {
           </div>
         </div>
       </section>
+
+      {/* East African Museum Network */}
+      <NetworkSection />
 
       {/* Participating Museums & Partners */}
       <section className="py-16 md:py-24 bg-white border-b border-earth-dark/10 overflow-hidden">

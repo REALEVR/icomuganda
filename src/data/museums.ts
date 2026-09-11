@@ -1,13 +1,40 @@
 import rwMuseumImg from "../assets/images/regenerated_image_1779527214803.webp";
 import emotImg from "../assets/images/regenerated_image_1779527212893.png";
 
-export const MUSEUMS_DATA = [
-  { 
-    id: 1, 
-    name: "URA Museum", 
-    region: "Kampala", 
-    type: "National", 
-    img: "/ura-museum.jpg?v=2", 
+export interface Museum {
+  id: number | string;
+  name: string;
+  region: string;
+  country: string;
+  culture: string;
+  type: string;
+  img: string;
+  logo?: string;
+  gallery: string[];
+  tags: string[];
+  description: string;
+  detailedDescription: string;
+  operatingHours: { day: string; hours: string }[];
+  mapEmbed: string;
+  location: string;
+  admission: string;
+  website?: string;
+  foundingMember?: boolean;
+}
+
+// Seed / founding members. New institutions join the network through the
+// "Register Your Museum" application, are reviewed by ICOM Uganda admins,
+// and — once approved — are published here alongside these founding members,
+// filterable by country, region, and culture across East Africa.
+export const MUSEUMS_DATA: Museum[] = [
+  {
+    id: 1,
+    name: "URA Museum",
+    region: "Kampala",
+    country: "Uganda",
+    culture: "Economic & Fiscal Heritage",
+    type: "National",
+    img: "/ura-museum.jpg?v=2",
     gallery: ["/ura-museum.jpg?v=2"],
     tags: ["History", "Taxation", "National"],
     description: "The URA Museum explores Uganda's history of revenue collection, showcasing the evolution of taxation and its role in national development.",
@@ -15,14 +42,17 @@ export const MUSEUMS_DATA = [
     operatingHours: [{ day: "Monday - Friday", hours: "8:00 AM - 5:00 PM" }],
     mapEmbed: "",
     location: "URA Tower, Nakawa, Kampala",
-    admission: "Free"
+    admission: "Free",
+    foundingMember: true
   },
-  { 
-    id: 2, 
-    name: "UPPC", 
-    region: "Entebbe", 
-    type: "Corporate", 
-    img: "/uppc.jpg?v=2", 
+  {
+    id: 2,
+    name: "UPPC",
+    region: "Entebbe",
+    country: "Uganda",
+    culture: "Print & Media Heritage",
+    type: "Corporate",
+    img: "/uppc.jpg?v=2",
     gallery: ["/uppc.jpg?v=2"],
     tags: ["Publishing", "History", "Archive"],
     description: "The Uganda Printing and Publishing Corporation archives the historic printing press and national gazettes spanning over a century.",
@@ -30,14 +60,17 @@ export const MUSEUMS_DATA = [
     operatingHours: [{ day: "Weekdays", hours: "9:00 AM - 4:00 PM" }],
     mapEmbed: "",
     location: "Entebbe, Uganda",
-    admission: "Free"
+    admission: "Free",
+    foundingMember: true
   },
-  { 
-    id: 3, 
-    name: "Keepers XR", 
-    region: "Virtual", 
-    type: "Technology", 
-    img: "/regenerated_image_1779520019250.png", 
+  {
+    id: 3,
+    name: "Keepers XR",
+    region: "Virtual",
+    country: "Uganda",
+    culture: "Digital & Contemporary Heritage",
+    type: "Technology",
+    img: "/regenerated_image_1779520019250.png",
     logo: "/regenerated_image_1779520026822.png",
     gallery: ["/regenerated_image_1779520019250.png"],
     tags: ["VR/AR", "Innovation", "Digital"],
@@ -46,12 +79,15 @@ export const MUSEUMS_DATA = [
     operatingHours: [{ day: "Online", hours: "24/7" }],
     mapEmbed: "",
     location: "Digital Platform",
-    admission: "Free"
+    admission: "Free",
+    foundingMember: true
   },
   {
     id: 4,
     name: "Page 4 Cinema Diary",
     region: "Kampala",
+    country: "Uganda",
+    culture: "Film & Visual Arts",
     type: "Media",
     img: "/page-4.jpg?v=2",
     gallery: ["/page-4.jpg?v=2"],
@@ -61,12 +97,15 @@ export const MUSEUMS_DATA = [
     operatingHours: [{ day: "Weekdays", hours: "10:00 AM - 5:00 PM" }],
     mapEmbed: "",
     location: "Kampala, Uganda",
-    admission: "Standard: UGX 5,000"
+    admission: "Standard: UGX 5,000",
+    foundingMember: true
   },
   {
     id: 5,
     name: "Uganda Police Museum",
     region: "Kampala",
+    country: "Uganda",
+    culture: "Law & Governance Heritage",
     type: "National",
     img: "/uganda-police.jpg?v=2",
     gallery: ["/uganda-police.jpg?v=2"],
@@ -76,12 +115,15 @@ export const MUSEUMS_DATA = [
     operatingHours: [{ day: "Monday - Friday", hours: "9:00 AM - 4:00 PM" }],
     mapEmbed: "",
     location: "Kampala, Uganda",
-    admission: "Free"
+    admission: "Free",
+    foundingMember: true
   },
   {
     id: 6,
     name: "RealVR African Heritage Tours",
     region: "Virtual",
+    country: "Uganda",
+    culture: "Digital & Contemporary Heritage",
     type: "Technology",
     img: "/regenerated_image_1779520020344.png",
     logo: "/regenerated_image_1779520029728.png",
@@ -92,12 +134,15 @@ export const MUSEUMS_DATA = [
     operatingHours: [{ day: "Online", hours: "24/7" }],
     mapEmbed: "",
     location: "Digital Platform",
-    admission: "Free"
+    admission: "Free",
+    foundingMember: true
   },
   {
     id: 7,
     name: "Uganda Railway Museum",
     region: "Jinja",
+    country: "Uganda",
+    culture: "Industrial & Transport Heritage",
     type: "History",
     img: rwMuseumImg,
     logo: "/regenerated_image_1779520031117.webp",
@@ -108,12 +153,15 @@ export const MUSEUMS_DATA = [
     operatingHours: [{ day: "Tuesday - Sunday", hours: "9:00 AM - 6:00 PM" }],
     mapEmbed: "",
     location: "Jinja Railway Station, Uganda",
-    admission: "Standard: UGX 5,000"
+    admission: "Standard: UGX 5,000",
+    foundingMember: true
   },
   {
     id: 8,
     name: "ICOM Uganda",
     region: "National",
+    country: "Uganda",
+    culture: "Museum Network & Advocacy",
     type: "Organization",
     img: "/icom-logo.png?v=2",
     gallery: ["/icom-logo.png?v=2", "/imd-poster.jpg?v=2"],
@@ -123,14 +171,17 @@ export const MUSEUMS_DATA = [
     operatingHours: [{ day: "Monday - Friday", hours: "9:00 AM - 5:00 PM" }],
     mapEmbed: "",
     location: "Kampala, Uganda",
-    admission: "Members Only"
+    admission: "Members Only",
+    foundingMember: true
   },
-  { 
-    id: 9, 
-    name: "eMoT Museum of Technology", 
-    region: "Kampala", 
-    type: "Technology", 
-    img: "/emot-cover.jpg", 
+  {
+    id: 9,
+    name: "eMoT Museum of Technology",
+    region: "Kampala",
+    country: "Uganda",
+    culture: "Digital & Contemporary Heritage",
+    type: "Technology",
+    img: "/emot-cover.jpg",
     gallery: ["/emot-cover.jpg", emotImg],
     tags: ["Technology", "Computing"],
     description: "A valuable learning center devoted to Collecting, Documenting, and Archiving computer technology artifacts.",
@@ -138,6 +189,37 @@ export const MUSEUMS_DATA = [
     operatingHours: [{ day: "Monday - Saturday", hours: "9:00 AM - 5:00 PM" }],
     mapEmbed: "",
     location: "Kampala, Uganda",
-    admission: "Students: UGX 2,000 / Adults: UGX 10,000"
+    admission: "Students: UGX 2,000 / Adults: UGX 10,000",
+    foundingMember: true
   }
+];
+
+// East African countries the network is open to. Used to populate the
+// registration form and directory filters — the seed data above is all
+// Uganda, but approved network members can come from anywhere in the list.
+export const EAST_AFRICAN_COUNTRIES = [
+  "Uganda",
+  "Kenya",
+  "Tanzania",
+  "Rwanda",
+  "Burundi",
+  "South Sudan",
+  "Ethiopia",
+  "Somalia",
+  "DR Congo",
+];
+
+export const MUSEUM_CULTURES = [
+  "National & Political Heritage",
+  "Economic & Fiscal Heritage",
+  "Print & Media Heritage",
+  "Digital & Contemporary Heritage",
+  "Film & Visual Arts",
+  "Law & Governance Heritage",
+  "Industrial & Transport Heritage",
+  "Ethnographic & Indigenous Culture",
+  "Natural History & Environment",
+  "Religious & Spiritual Heritage",
+  "Museum Network & Advocacy",
+  "Other",
 ];

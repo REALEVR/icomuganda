@@ -10,6 +10,8 @@ import { Home } from "./pages/Home";
 import { About } from "./pages/About";
 import { Museums } from "./pages/Museums";
 import { MuseumDetail } from "./pages/MuseumDetail";
+import { JoinNetwork } from "./pages/JoinNetwork";
+import { AdminMuseums } from "./pages/AdminMuseums";
 import { VirtualTours } from "./pages/VirtualTours";
 import { News } from "./pages/News";
 import { Events } from "./pages/Events";
@@ -30,6 +32,8 @@ export default function App() {
             <Route path="about" element={<About />} />
             <Route path="museums" element={<Museums />} />
             <Route path="museums/:id" element={<MuseumDetail />} />
+            <Route path="join-network" element={<JoinNetwork />} />
+            <Route path="admin/museums" element={<AdminMuseums />} />
             <Route path="virtual-tours" element={<VirtualTours />} />
             <Route path="events" element={<Events />} />
             <Route path="news" element={<News />} />

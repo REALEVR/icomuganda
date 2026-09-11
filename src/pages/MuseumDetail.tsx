@@ -1,12 +1,54 @@
+import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import { ArrowLeft, MapPin, Clock, ExternalLink, Ticket } from "lucide-react";
+import { ArrowLeft, Loader2, MapPin, Clock, ExternalLink, Ticket, ShieldCheck } from "lucide-react";
+import { doc, getDoc } from "firebase/firestore";
 import { SEO } from "../components/SEO";
-import { MUSEUMS_DATA } from "../data/museums";
+import { MUSEUMS_DATA, Museum } from "../data/museums";
+import { db } from "../lib/firebase";
 import { motion } from "framer-motion";
 
 export function MuseumDetail() {
   const { id } = useParams<{ id: string }>();
-  const museum = MUSEUMS_DATA.find((m) => m.id === Number(id));
+  const [museum, setMuseum] = useState<Museum | null | undefined>(undefined);
+
+  useEffect(() => {
+    if (!id) return;
+    setMuseum(undefined);
+
+    const seedMatch = MUSEUMS_DATA.find((m) => String(m.id) === id);
+    if (seedMatch) {
+      setMuseum(seedMatch);
+      return;
+    }
+
+    // Not a founding-member museum — look it up in the live Network directory.
+    let cancelled = false;
+    getDoc(doc(db, "museums", id))
+      .then((snap) => {
+        if (cancelled) return;
+        if (snap.exists()) {
+          setMuseum({ id: snap.id, ...(snap.data() as any) } as Museum);
+        } else {
+          setMuseum(null);
+        }
+      })
+      .catch((err) => {
+        console.error("Failed to load museum", err);
+        if (!cancelled) setMuseum(null);
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [id]);
+
+  if (museum === undefined) {
+    return (
+      <div className="min-h-screen bg-warm-white flex items-center justify-center">
+        <Loader2 className="w-8 h-8 text-earth-accent animate-spin" />
+      </div>
+    );
+  }
 
   if (!museum) {
     return (
@@ -29,16 +71,16 @@ export function MuseumDetail() {
     "address": {
       "@type": "PostalAddress",
       "addressLocality": museum.region,
-      "addressCountry": "UG"
+      "addressCountry": museum.country || "UG"
     },
-    ...((museum as any).website && { "url": (museum as any).website })
+    ...(museum.website && { "url": museum.website })
   };
 
   return (
     <div className="bg-warm-white min-h-screen">
-      <SEO 
-        title={`${museum.name} | ICOM Uganda`} 
-        description={museum.description} 
+      <SEO
+        title={`${museum.name} | ICOM Uganda`}
+        description={museum.description}
         schema={museumSchema}
         breadcrumbs={[
           { name: "Home", url: typeof window !== 'undefined' ? window.location.origin : '' },
@@ -46,7 +88,7 @@ export function MuseumDetail() {
           { name: museum.name, url: typeof window !== 'undefined' ? window.location.href : '' }
         ]}
       />
-      
+
       {/* Hero Section */}
       <div className="relative h-[60vh] min-h-[500px] w-full overflow-hidden">
         <div className="absolute inset-0 z-0">
@@ -59,21 +101,26 @@ export function MuseumDetail() {
           <Link to="/museums" className="inline-flex items-center gap-2 text-white/80 hover:text-white font-medium mb-8 transition-colors uppercase tracking-widest text-xs w-max bg-earth-dark/40 backdrop-blur-md px-4 py-2 rounded-full border border-white/20">
             <ArrowLeft className="w-4 h-4" /> Back to Directory
           </Link>
-          
-          <div className="flex items-center gap-3 mb-4">
+
+          <div className="flex items-center gap-3 mb-4 flex-wrap">
             <span className="text-xs font-bold px-3 py-1 bg-white text-earth-dark rounded-full uppercase tracking-wider">
               {museum.type}
             </span>
-            {museum.tags.map(tag => (
+            {!museum.foundingMember && (
+              <span className="text-xs font-bold px-3 py-1 bg-earth-accent text-white rounded-full uppercase tracking-wider flex items-center gap-1.5">
+                <ShieldCheck className="w-3.5 h-3.5" /> Network Member
+              </span>
+            )}
+            {museum.tags?.map(tag => (
               <span key={tag} className="text-xs font-medium bg-earth-dark/40 backdrop-blur-sm text-white px-3 py-1 rounded-full border border-white/20 hidden sm:inline-block">
                 {tag}
               </span>
             ))}
           </div>
-          
+
           <h1 className="font-serif text-5xl md:text-7xl font-bold text-white mb-4 drop-shadow-lg">{museum.name}</h1>
           <div className="flex items-center gap-2 text-lg text-white/90 font-medium">
-            <MapPin className="w-5 h-5" /> {museum.region}
+            <MapPin className="w-5 h-5" /> {museum.region}{museum.country ? `, ${museum.country}` : ""}
           </div>
         </div>
       </div>
@@ -89,32 +136,36 @@ export function MuseumDetail() {
               </p>
             </div>
 
-            <h3 className="font-serif text-3xl text-earth-dark mb-8">Gallery</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-16">
-              {museum.gallery.map((img, i) => (
-                <div key={i} className={`rounded-3xl overflow-hidden shadow-sm hover:shadow-md transition-shadow ${i === 0 ? 'md:col-span-2 aspect-[21/9]' : 'aspect-square'}`}>
-                  <img src={img} alt={`${museum.name} gallery image ${i + 1}`} className="w-full h-full object-cover" />
+            {museum.gallery?.length > 0 && (
+              <>
+                <h3 className="font-serif text-3xl text-earth-dark mb-8">Gallery</h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-16">
+                  {museum.gallery.map((img, i) => (
+                    <div key={i} className={`rounded-3xl overflow-hidden shadow-sm hover:shadow-md transition-shadow ${i === 0 ? 'md:col-span-2 aspect-[21/9]' : 'aspect-square'}`}>
+                      <img src={img} alt={`${museum.name} gallery image ${i + 1}`} className="w-full h-full object-cover" />
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
+              </>
+            )}
           </div>
 
           {/* Sidebar */}
           <div className="w-full lg:w-1/3 space-y-8">
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               className="bg-white p-8 rounded-3xl border border-stone shadow-sm"
             >
               <h3 className="font-serif text-2xl text-earth-dark mb-6 border-b border-earth-dark/10 pb-4">Visitor Information</h3>
-              
+
               <div className="space-y-6">
                 <div>
                   <div className="flex items-center gap-2 text-earth-dark font-bold mb-3 uppercase tracking-widest text-xs">
                     <Clock className="w-4 h-4 text-earth-accent" /> Operating Hours
                   </div>
                   <ul className="space-y-2">
-                    {museum.operatingHours.map((hours, i) => (
+                    {museum.operatingHours?.map((hours, i) => (
                       <li key={i} className="flex justify-between text-sm text-earth-muted">
                         <span className="font-medium">{hours.day}</span>
                         <span>{hours.hours}</span>
@@ -131,12 +182,12 @@ export function MuseumDetail() {
                     <p className="text-sm text-earth-muted">{museum.admission}</p>
                   </div>
                 )}
-                
-                {(museum as any).website && (
+
+                {museum.website && (
                   <div className="pt-4 border-t border-earth-dark/10">
-                    <a 
-                      href={(museum as any).website}
-                      target="_blank" 
+                    <a
+                      href={museum.website}
+                      target="_blank"
                       rel="noopener noreferrer"
                       className="w-full py-4 rounded-xl flex justify-center items-center gap-2 bg-earth-accent text-white font-semibold hover:bg-earth-dark transition-colors"
                     >
@@ -147,28 +198,30 @@ export function MuseumDetail() {
               </div>
             </motion.div>
 
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
-              className="bg-white p-8 rounded-3xl border border-stone shadow-sm"
-            >
-              <h3 className="font-serif text-2xl text-earth-dark mb-6 border-b border-earth-dark/10 pb-4">Location</h3>
-              <p className="text-earth-muted text-sm mb-4 leading-relaxed">{museum.location}</p>
-              
-              <div className="w-full aspect-square rounded-2xl overflow-hidden bg-stone">
-                <iframe 
-                  src={museum.mapEmbed}
-                  width="100%" 
-                  height="100%" 
-                  style={{ border: 0 }} 
-                  allowFullScreen 
-                  loading="lazy" 
-                  referrerPolicy="no-referrer-when-downgrade"
-                  title={`${museum.name} Location`}
-                ></iframe>
-              </div>
-            </motion.div>
+            {museum.mapEmbed && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 }}
+                className="bg-white p-8 rounded-3xl border border-stone shadow-sm"
+              >
+                <h3 className="font-serif text-2xl text-earth-dark mb-6 border-b border-earth-dark/10 pb-4">Location</h3>
+                <p className="text-earth-muted text-sm mb-4 leading-relaxed">{museum.location}</p>
+
+                <div className="w-full aspect-square rounded-2xl overflow-hidden bg-stone">
+                  <iframe
+                    src={museum.mapEmbed}
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0 }}
+                    allowFullScreen
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    title={`${museum.name} Location`}
+                  ></iframe>
+                </div>
+              </motion.div>
+            )}
           </div>
         </div>
       </div>

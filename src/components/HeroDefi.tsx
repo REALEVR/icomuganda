@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import { Sparkles, ArrowUpRight, ChevronRight, Menu } from "lucide-react";
+import { Sparkles, ArrowUpRight, ChevronRight, ChevronDown, Menu } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 export function Navbar() {
@@ -136,11 +136,12 @@ export function HeroDefi() {
           
           <div className="w-full flex flex-col items-center text-center max-w-4xl px-6 -mt-16 md:mt-0">
             <HeroBadge />
-            <motion.h1 
+            <motion.h1
               initial={{ opacity: 0, scale: 0.98 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-[72px] font-bold text-white mb-4 tracking-tight leading-[1.05] drop-shadow-xl font-serif"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-[72px] font-bold text-white mb-4 tracking-tight leading-[1.05] drop-shadow-2xl font-serif"
+              style={{ textShadow: "0 2px 24px rgba(0,0,0,0.35)" }}
             >
               The Voice of Uganda's Museums
             </motion.h1>
@@ -153,10 +154,18 @@ export function HeroDefi() {
               ICOM Uganda is the national network representing museum professionals. Join us in preserving, advancing, and celebrating our cultural heritage.
             </motion.p>
           </div>
-          
-          <div className="hidden md:block h-[10vh]" />
+
+          <motion.div
+            initial={{ opacity: 0, y: -6 }}
+            animate={{ opacity: 1, y: 6 }}
+            transition={{ duration: 1.4, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }}
+            className="hidden md:flex flex-col items-center gap-1 text-white/70 mb-6"
+          >
+            <span className="text-[10px] uppercase tracking-[0.3em]">Scroll</span>
+            <ChevronDown className="w-4 h-4" />
+          </motion.div>
         </div>
-        
+
         <BottomLeftCard />
         <BottomRightCorner />
       </section>

@@ -8,6 +8,15 @@ service cloud.firestore {
     function existing() { return resource.data; }
     function isSignedIn() { return request.auth != null; }
 
+    // Kept in sync with NETWORK_ADMIN_EMAILS in src/lib/admin.ts.
+    // Only these ICOM Uganda network admins can review museum
+    // applications and manage the public directory.
+    function isNetworkAdmin() {
+      return isSignedIn()
+        && request.auth.token.email != null
+        && request.auth.token.email.lower() in ['icomuganda@gmail.com'];
+    }
+
     function isValidUser(data) {
       return data.keys().hasAll(['uid', 'email', 'score', 'createdAt', 'updatedAt'])
         && data.keys().size() >= 5
@@ -47,6 +56,39 @@ service cloud.firestore {
     match /questions/{questionId} {
       allow read: if true;
       allow write: if true; // Just for initial seeding
+    }
+
+    // Museum Network — applications submitted by museums wanting to join
+    // the East African directory. Anyone can submit one (the public
+    // "Register Your Museum" form); only network admins may read the
+    // queue and review/approve/reject entries.
+    function isValidApplication(data) {
+      return data.keys().hasAll(['museumName', 'country', 'region', 'culture', 'description', 'contactName', 'contactEmail', 'status'])
+        && data.museumName is string && data.museumName.size() > 0 && data.museumName.size() <= 200
+        && data.country is string && data.country.size() <= 100
+        && data.region is string && data.region.size() <= 100
+        && data.culture is string && data.culture.size() <= 100
+        && data.description is string && data.description.size() <= 4000
+        && data.contactName is string && data.contactName.size() <= 200
+        && data.contactEmail is string && data.contactEmail.size() <= 256
+        && data.status == 'pending';
+    }
+
+    match /museumApplications/{applicationId} {
+      allow create: if isValidApplication(incoming());
+      allow get: if isNetworkAdmin();
+      allow list: if isNetworkAdmin();
+      allow update: if isNetworkAdmin()
+        && incoming().diff(existing()).affectedKeys().hasOnly(['status', 'reviewedAt', 'rejectionReason']);
+      allow delete: if isNetworkAdmin();
+    }
+
+    // Museum Network — the public directory of approved member museums,
+    // categorised by country, region, and culture. Published only by
+    // network admins after an application is approved.
+    match /museums/{museumId} {
+      allow read: if true;
+      allow write: if isNetworkAdmin();
     }
   }
 }
