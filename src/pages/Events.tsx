@@ -78,7 +78,7 @@ export function Events() {
             </div>
             <div className="relative z-10">
               <div className="flex items-center gap-4 mb-6">
-                <Youtube className="w-8 h-8 text-earth-accent" />
+                <Youtube className="w-8 h-8 text-earth-accent-bright" />
                 <h2 className="font-serif text-3xl text-warm-white">Digital Showroom & Lives</h2>
               </div>
               <p className="text-warm-white/80 text-lg md:text-xl max-w-2xl mb-8 leading-relaxed">
@@ -122,7 +122,7 @@ export function Events() {
                     </div>
                     <p className="text-earth-muted text-sm md:text-base leading-relaxed mb-6">{evt.description}</p>
                     <div className="bg-stone/50 p-4 rounded-xl border border-earth-dark/5 flex flex-col md:flex-row md:items-center justify-between gap-3">
-                      <span className="text-xs font-bold uppercase tracking-wider text-earth-muted/80">Source: {evt.source}</span>
+                      <span className="text-xs font-bold uppercase tracking-wider text-earth-muted">Source: {evt.source}</span>
                       {evt.externalLink && (
                         <a href={evt.externalLink} target="_blank" rel="noopener noreferrer" className="text-earth-accent hover:text-earth-dark transition-colors flex items-center gap-1 text-sm font-medium whitespace-nowrap">
                           Verify <ExternalLink className="w-3 h-3" />
@@ -157,13 +157,13 @@ export function Events() {
                    
                    <div className="flex-1 mt-2 md:mt-0">
                      <h3 className="font-serif text-2xl font-medium text-earth-dark mb-3 group-hover:text-earth-accent transition-colors">{evt.title}</h3>
-                     <div className="flex flex-wrap gap-6 text-sm text-earth-muted/70 font-medium mb-4">
+                     <div className="flex flex-wrap gap-6 text-sm text-earth-muted font-medium mb-4">
                        {evt.location && <span className="flex items-center gap-2"><MapPin className="w-4 h-4" /> {evt.location}</span>}
                      </div>
                      <p className="text-earth-muted text-sm leading-relaxed mb-6">{evt.description}</p>
                      
                      <div className="flex flex-col md:flex-row md:items-center justify-between border-t border-earth-dark/5 pt-4 gap-3">
-                       <span className="text-xs font-bold uppercase tracking-wider text-earth-muted/60">Source: {evt.source}</span>
+                       <span className="text-xs font-bold uppercase tracking-wider text-earth-muted">Source: {evt.source}</span>
                        {evt.externalLink && (
                          <a href={evt.externalLink} target="_blank" rel="noopener noreferrer" className="text-earth-muted hover:text-earth-accent transition-colors flex items-center gap-1 text-sm font-medium whitespace-nowrap">
                            More Info <ExternalLink className="w-3 h-3" />

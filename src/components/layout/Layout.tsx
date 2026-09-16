@@ -1,7 +1,6 @@
 import { Outlet } from "react-router-dom";
 import { Navbar } from "./Navbar";
 import { Footer } from "./Footer";
-import { RegistrationPopup } from "../RegistrationPopup";
 import { Chatbot } from "../Chatbot";
 import { MemberDashboard } from "../MemberDashboard";
 import { useEffect, useState } from "react";
@@ -31,7 +30,6 @@ export function Layout() {
         <Outlet />
       </main>
       <Chatbot />
-      <RegistrationPopup />
       {user && <MemberDashboard user={user} />}
       <Footer />
     </div>

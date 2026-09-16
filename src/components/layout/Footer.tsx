@@ -34,14 +34,14 @@ export function Footer() {
         <div className="container mx-auto px-6 py-14">
           <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
             <div>
-              <span className="eyebrow text-earth-accent mb-3">Stay Connected</span>
+              <span className="eyebrow text-earth-accent-bright mb-3">Stay Connected</span>
               <h2 className="font-serif text-3xl md:text-4xl font-medium max-w-lg">
                 Heritage news, straight to your inbox.
               </h2>
             </div>
             {subscribed ? (
               <div className="flex items-center gap-3 bg-white/10 border border-white/20 rounded-full px-6 py-4 text-sm font-medium">
-                <Send className="w-4 h-4 text-earth-accent" /> Thank you — you're on the list.
+                <Send className="w-4 h-4 text-earth-accent-bright" /> Thank you — you're on the list.
               </div>
             ) : (
               <form onSubmit={handleSubscribe} className="flex w-full max-w-md gap-3">
@@ -87,15 +87,15 @@ export function Footer() {
               ))}
             </div>
             <div className="text-sm text-white/70 space-y-2">
-              <p className="flex items-center gap-2"><MapPin className="w-4 h-4 text-earth-accent shrink-0" /> P.O. Box 16708, Wandegeya, Kampala, Uganda</p>
+              <p className="flex items-center gap-2"><MapPin className="w-4 h-4 text-earth-accent-bright shrink-0" /> P.O. Box 16708, Wandegeya, Kampala, Uganda</p>
               <a href="mailto:icomuganda@gmail.com" className="flex items-center gap-2 hover:text-white transition-colors w-fit">
-                <Mail className="w-4 h-4 text-earth-accent shrink-0" /> icomuganda@gmail.com
+                <Mail className="w-4 h-4 text-earth-accent-bright shrink-0" /> icomuganda@gmail.com
               </a>
             </div>
           </div>
 
           <div>
-            <h3 className="uppercase tracking-widest text-xs font-semibold text-earth-accent mb-6">Museum Network</h3>
+            <h3 className="uppercase tracking-widest text-xs font-semibold text-earth-accent-bright mb-6">Museum Network</h3>
             <ul className="flex flex-col gap-3 text-sm text-white/70">
               <li><Link to="/about" className="hover:text-white transition-colors">About ICOM Uganda</Link></li>
               <li><Link to="/museums" className="hover:text-white transition-colors">Network Directory</Link></li>
@@ -106,7 +106,7 @@ export function Footer() {
           </div>
 
           <div>
-            <h3 className="uppercase tracking-widest text-xs font-semibold text-earth-accent mb-6">Engagement</h3>
+            <h3 className="uppercase tracking-widest text-xs font-semibold text-earth-accent-bright mb-6">Engagement</h3>
             <ul className="flex flex-col gap-3 text-sm text-white/70">
               <li><Link to="/membership" className="hover:text-white transition-colors">Membership Portal</Link></li>
               <li><Link to="/donate" className="hover:text-white transition-colors">Support & Donate</Link></li>

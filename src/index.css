@@ -18,7 +18,15 @@
 
   --color-warm-white: #FFFFFF;
   --color-earth-dark: #003f90;       /* ICOM Pantone 287 (Deep Royal Blue / Monogram) */
-  --color-earth-accent: #7390c4;     /* ICOM Pantone 660 (Corporate Light Blue) */
+  /* ICOM Pantone 660 (Corporate Light Blue, #7390c4) only gives 3.2:1 on white —
+     below the 4.5:1 WCAG AA floor for the small text it's used for sitewide
+     (eyebrows, tags, links, button labels). Darkened to #2f6fb0 for text and
+     interactive elements: 5.2:1 on white, 5.1:1 for white-on-button. The
+     original Pantone value survives as --color-earth-accent-bright below for
+     the few large, bold, on-dark-navy uses (e.g. stat numbers), where 3:1 is
+     the applicable threshold and the lighter tone reads better against navy. */
+  --color-earth-accent: #2f6fb0;
+  --color-earth-accent-bright: #7390c4;
   --color-earth-muted: #4e6c9a;      /* Harmonious medium navy slate */
   --color-stone: #ecf1f8;            /* Very light corporate slate-blue */
   --color-woven-teal: #002554;       /* Safe dark contrast blue */
@@ -95,7 +103,7 @@ h1, h2, h3, h4, h5, h6 {
     90deg,
     var(--color-woven-teal) 0%, var(--color-woven-teal) 20px,
     var(--color-warm-white) 20px, var(--color-warm-white) 40px,
-    var(--color-earth-accent) 40px, var(--color-earth-accent) 60px,
+    var(--color-earth-accent-bright) 40px, var(--color-earth-accent-bright) 60px,
     var(--color-earth-dark) 60px, var(--color-earth-dark) 80px
   );
 }
@@ -151,5 +159,19 @@ h1, h2, h3, h4, h5, h6 {
   height: 1px;
   width: 100%;
   background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--color-earth-dark) 15%, transparent), transparent);
+}
+
+/* Accessibility: respect the system's reduced-motion preference. The scroll
+   "whileInView" reveals, orbiting museum ring, and marquee strips throughout
+   the site are decorative, not carriers of meaning, so they're safe to
+   shorten to near-instant rather than disabled outright — content still
+   needs to end up fully visible with no animation logic to fight. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 

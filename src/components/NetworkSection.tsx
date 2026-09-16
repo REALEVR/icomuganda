@@ -31,7 +31,7 @@ export function NetworkSection() {
       <div className="container mx-auto px-6 relative z-10">
         <div className="max-w-3xl mx-auto text-center mb-16">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 mb-6">
-            <Sparkles className="w-4 h-4 text-earth-accent" />
+            <Sparkles className="w-4 h-4 text-earth-accent-bright" />
             <span className="text-xs font-bold uppercase tracking-widest">One Network, Every Museum</span>
           </div>
           <h2 className="font-serif text-4xl md:text-6xl font-semibold mb-6">
@@ -47,15 +47,15 @@ export function NetworkSection() {
         {/* Stats */}
         <div className="grid grid-cols-2 md:grid-cols-3 gap-6 max-w-3xl mx-auto mb-16">
           <div className="text-center">
-            <div className="font-serif text-4xl md:text-5xl font-bold text-earth-accent mb-1">{memberCount}+</div>
+            <div className="font-serif text-4xl md:text-5xl font-bold text-earth-accent-bright mb-1">{memberCount}+</div>
             <div className="text-xs uppercase tracking-widest text-white/60">Member Museums</div>
           </div>
           <div className="text-center">
-            <div className="font-serif text-4xl md:text-5xl font-bold text-earth-accent mb-1">{countryCount}</div>
+            <div className="font-serif text-4xl md:text-5xl font-bold text-earth-accent-bright mb-1">{countryCount}</div>
             <div className="text-xs uppercase tracking-widest text-white/60">Countries Open to Join</div>
           </div>
           <div className="text-center col-span-2 md:col-span-1">
-            <div className="font-serif text-4xl md:text-5xl font-bold text-earth-accent mb-1">100%</div>
+            <div className="font-serif text-4xl md:text-5xl font-bold text-earth-accent-bright mb-1">100%</div>
             <div className="text-xs uppercase tracking-widest text-white/60">Admin-Verified Listings</div>
           </div>
         </div>
@@ -71,7 +71,7 @@ export function NetworkSection() {
               transition={{ delay: i * 0.1 }}
               className="bg-white/5 border border-white/10 rounded-3xl p-6 backdrop-blur-sm"
             >
-              <div className="w-12 h-12 rounded-2xl bg-earth-accent/20 text-earth-accent flex items-center justify-center mb-4">
+              <div className="w-12 h-12 rounded-2xl bg-earth-accent-bright/20 text-earth-accent-bright flex items-center justify-center mb-4">
                 <step.icon className="w-6 h-6" />
               </div>
               <div className="text-xs font-bold uppercase tracking-widest text-white/50 mb-1">Step {i + 1}</div>
@@ -90,7 +90,7 @@ export function NetworkSection() {
           </Link>
           <Link
             to="/museums"
-            className="inline-flex items-center gap-2 text-white uppercase tracking-widest text-sm font-semibold hover:text-earth-accent transition-colors border-b border-white/30 hover:border-earth-accent pb-1"
+            className="inline-flex items-center gap-2 text-white uppercase tracking-widest text-sm font-semibold hover:text-earth-accent-bright transition-colors border-b border-white/30 hover:border-earth-accent-bright pb-1"
           >
             Browse the Directory
           </Link>

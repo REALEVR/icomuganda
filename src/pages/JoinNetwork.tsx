@@ -123,7 +123,7 @@ export function JoinNetwork() {
         <div className="absolute inset-0 opacity-10 pointer-events-none" style={{ backgroundImage: 'repeating-linear-gradient(45deg, #fff 0, #fff 2px, transparent 2px, transparent 14px)' }} />
         <div className="container mx-auto max-w-4xl text-center relative z-10">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 mb-6">
-            <Sparkles className="w-4 h-4 text-earth-accent" />
+            <Sparkles className="w-4 h-4 text-earth-accent-bright" />
             <span className="text-xs font-semibold uppercase tracking-widest">East African Museum Network</span>
           </div>
           <h1 className="font-serif text-4xl md:text-6xl font-semibold mb-6">Register Your Museum</h1>
