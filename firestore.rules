@@ -55,7 +55,14 @@ service cloud.firestore {
     
     match /questions/{questionId} {
       allow read: if true;
-      allow write: if true; // Just for initial seeding
+      // src/pages/Game.tsx seeds this collection client-side (unauthenticated)
+      // the first time it finds it empty, writing to a fixed, known doc id
+      // per question — so `create` on a not-yet-existing id is legitimate.
+      // `if true` here let anyone overwrite or delete already-seeded
+      // questions (e.g. rewrite a question's `correct` answer) at any time,
+      // not just during that initial seed.
+      allow create: if !exists(/databases/$(database)/documents/questions/$(questionId));
+      allow update, delete: if false;
     }
 
     // Museum Network — applications submitted by museums wanting to join
