@@ -5,6 +5,7 @@
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
+import { MotionConfig } from "motion/react";
 import { Layout } from "./components/layout/Layout";
 import { Home } from "./pages/Home";
 import { About } from "./pages/About";
@@ -25,6 +26,14 @@ import { Game } from "./pages/Game";
 export default function App() {
   return (
     <HelmetProvider>
+      {/* reducedMotion="user" makes every motion/react animation on the site
+          (scroll reveals, the orbiting museum ring, marquees) honor the
+          OS-level "reduce motion" setting automatically — content still
+          renders in its end state, just without the transform/opacity
+          interpolation. This is the JS-driven counterpart to the
+          prefers-reduced-motion CSS block in index.css, which only covers
+          plain CSS transitions/animations. */}
+      <MotionConfig reducedMotion="user">
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Layout />}>
@@ -47,6 +56,7 @@ export default function App() {
           </Route>
         </Routes>
       </BrowserRouter>
+      </MotionConfig>
     </HelmetProvider>
   );
 }

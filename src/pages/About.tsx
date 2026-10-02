@@ -25,7 +25,7 @@ export function About() {
               Who We Are
             </span>
             <h1 className="font-serif text-5xl md:text-7xl font-bold mb-6 leading-tight">
-              Preserving Our Heritage. <br /><span className="text-earth-accent">Uniting Our World.</span>
+              Preserving Our Heritage. <br /><span className="text-earth-accent-bright">Uniting Our World.</span>
             </h1>
             <p className="text-lg md:text-xl text-white/90 max-w-2xl font-light leading-relaxed">
               The International Council of Museums (ICOM) Uganda is the official National Committee dedicated to advancing the mission of preserving, protecting, and promoting both tangible and intangible cultural heritage.
@@ -303,7 +303,7 @@ export function About() {
             <div className="space-y-8">
               <div className="bg-earth-dark text-white rounded-3xl p-8 shadow-xl">
                 <h4 className="font-bold text-xl mb-4">IMD 2026 Theme</h4>
-                <blockquote className="font-serif text-2xl italic text-earth-accent mb-4">
+                <blockquote className="font-serif text-2xl italic text-earth-accent-bright mb-4">
                   "Museums Uniting a Divided World"
                 </blockquote>
                 <p className="text-white/80 text-sm">

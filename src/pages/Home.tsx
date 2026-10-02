@@ -76,7 +76,7 @@ export function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
             >
-              <h3 className="text-earth-accent font-semibold tracking-widest uppercase text-sm mb-4">About ICOM</h3>
+              <h3 className="text-earth-accent-bright font-semibold tracking-widest uppercase text-sm mb-4">About ICOM</h3>
               <h2 className="font-serif text-5xl md:text-6xl font-medium mb-8">Empowering Museum Professionals</h2>
               <div className="space-y-6 text-lg text-white/80 font-light leading-relaxed">
                 <p>
@@ -90,7 +90,7 @@ export function Home() {
                  <Link to="/membership" className="bg-earth-accent text-warm-white px-8 py-4 rounded-full font-bold tracking-widest uppercase text-sm hover:bg-white hover:text-earth-dark transition-all inline-block shadow-xl">
                     Register Now
                  </Link>
-                 <Link to="/about" className="inline-flex flex-row items-center gap-3 text-white uppercase tracking-widest text-sm font-semibold hover:text-earth-accent transition-colors border-b border-white/30 hover:border-earth-accent pb-1">
+                 <Link to="/about" className="inline-flex flex-row items-center gap-3 text-white uppercase tracking-widest text-sm font-semibold hover:text-earth-accent-bright transition-colors border-b border-white/30 hover:border-earth-accent-bright pb-1">
                     Read Our Mission <ArrowRight className="w-4 h-4" />
                  </Link>
               </div>

@@ -2,16 +2,80 @@ import express from "express";
 import path from "path";
 import { GoogleGenAI, Modality } from "@google/genai";
 
+const MAX_MESSAGE_LENGTH = 1000;
+const MAX_HISTORY_ITEMS = 20;
+const RATE_LIMIT_WINDOW_MS = 60_000;
+const RATE_LIMIT_MAX_REQUESTS = 10;
+
+// Per-IP sliding-window limiter. In-memory, so it resets on restart and is
+// per-instance; swap for a shared store if the app is scaled horizontally.
+const requestLog = new Map<string, number[]>();
+
+function isRateLimited(ip: string, now = Date.now()): boolean {
+  const recent = (requestLog.get(ip) ?? []).filter((t) => now - t < RATE_LIMIT_WINDOW_MS);
+  if (recent.length >= RATE_LIMIT_MAX_REQUESTS) {
+    requestLog.set(ip, recent);
+    return true;
+  }
+  recent.push(now);
+  requestLog.set(ip, recent);
+  return false;
+}
+
+type HistoryItem = { role: string; text: string };
+
+function validateChatBody(body: any): { message: string; history: HistoryItem[] } | string {
+  const { message, history = [] } = body ?? {};
+  if (typeof message !== "string" || !message.trim()) {
+    return "message must be a non-empty string";
+  }
+  if (message.length > MAX_MESSAGE_LENGTH) {
+    return `message must be at most ${MAX_MESSAGE_LENGTH} characters`;
+  }
+  if (!Array.isArray(history) || history.length > MAX_HISTORY_ITEMS) {
+    return `history must be an array of at most ${MAX_HISTORY_ITEMS} items`;
+  }
+  for (const m of history) {
+    if (
+      !m ||
+      typeof m.role !== "string" ||
+      typeof m.text !== "string" ||
+      m.text.length > MAX_MESSAGE_LENGTH * 2
+    ) {
+      return "history items must be { role: string, text: string } with bounded length";
+    }
+  }
+  return { message: message.trim(), history };
+}
+
 async function startServer() {
   const app = express();
   const PORT = 3000;
 
-  app.use(express.json());
+  // Cap request body size so oversized payloads are rejected before parsing.
+  app.use(express.json({ limit: "32kb" }));
 
-  // API constraints check
+  // Periodically drop idle IPs so the limiter map cannot grow unbounded.
+  setInterval(() => {
+    const now = Date.now();
+    for (const [ip, times] of requestLog) {
+      if (times.every((t) => now - t >= RATE_LIMIT_WINDOW_MS)) requestLog.delete(ip);
+    }
+  }, RATE_LIMIT_WINDOW_MS).unref();
+
   app.post("/api/chat", async (req, res) => {
+    if (isRateLimited(req.ip ?? "unknown")) {
+      res.setHeader("Retry-After", String(Math.ceil(RATE_LIMIT_WINDOW_MS / 1000)));
+      return res.status(429).json({ error: "Too many requests. Please try again shortly." });
+    }
+
+    const parsed = validateChatBody(req.body);
+    if (typeof parsed === "string") {
+      return res.status(400).json({ error: parsed });
+    }
+    const { message, history } = parsed;
+
     try {
-      const { message, history } = req.body;
       const ai = new GoogleGenAI({
         apiKey: process.env.GEMINI_API_KEY,
         httpOptions: {
@@ -26,16 +90,14 @@ async function startServer() {
         config: {
           systemInstruction: "You are a helpful museum assistant chatbot for ICOM Uganda. You help visitors navigate the platform, suggest museums, provide insights about cultural heritage, and answer general support queries. Keep your responses concise, welcoming, and informative.",
         },
+        // Use the structured history API rather than flattening into the prompt.
+        history: history.map((m) => ({
+          role: m.role === "user" ? "user" : "model",
+          parts: [{ text: m.text }],
+        })),
       });
 
-      // if history exists, we should probably set it or just pass history in a different way.
-      // But for simplicity, we can just send the latest message or format history into a string.
-      let prompt = message;
-      if (history && history.length > 0) {
-        prompt = `Previous conversation:\n${history.map((m: any) => `${m.role}: ${m.text}`).join('\n')}\nUser: ${message}`;
-      }
-
-      const response = await chat.sendMessage({ message: prompt });
+      const response = await chat.sendMessage({ message });
       const reply = response.text;
 
       // generate TTS
@@ -60,8 +122,9 @@ async function startServer() {
 
       res.json({ text: reply, audio: audioBase64 });
     } catch (e: any) {
+      // Log details server-side; don't leak internal error text to clients.
       console.error(e);
-      res.status(500).json({ error: e.message });
+      res.status(500).json({ error: "Something went wrong. Please try again." });
     }
   });
 
