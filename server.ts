@@ -1,6 +1,7 @@
 import express from "express";
 import path from "path";
 import { GoogleGenAI, Modality } from "@google/genai";
+import { createRateLimiter, validateChatBody } from "./chatGuard";
 
 async function startServer() {
   const app = express();
@@ -8,10 +9,21 @@ async function startServer() {
 
   app.use(express.json());
 
-  // API constraints check
+  const allowChat = createRateLimiter();
+
   app.post("/api/chat", async (req, res) => {
     try {
-      const { message, history } = req.body;
+      // Every request costs Gemini chat + TTS calls on the server's key.
+      if (!allowChat(req.ip ?? "unknown")) {
+        res.status(429).json({ error: "Too many requests, please try again shortly." });
+        return;
+      }
+      const parsed = validateChatBody(req.body);
+      if (!parsed.ok) {
+        res.status(400).json({ error: parsed.error });
+        return;
+      }
+      const { message, history } = parsed.value;
       const ai = new GoogleGenAI({
         apiKey: process.env.GEMINI_API_KEY,
         httpOptions: {
@@ -32,7 +44,7 @@ async function startServer() {
       // But for simplicity, we can just send the latest message or format history into a string.
       let prompt = message;
       if (history && history.length > 0) {
-        prompt = `Previous conversation:\n${history.map((m: any) => `${m.role}: ${m.text}`).join('\n')}\nUser: ${message}`;
+        prompt = `Previous conversation:\n${history.map((m) => `${m.role}: ${m.text}`).join('\n')}\nUser: ${message}`;
       }
 
       const response = await chat.sendMessage({ message: prompt });
@@ -59,9 +71,9 @@ async function startServer() {
       }
 
       res.json({ text: reply, audio: audioBase64 });
-    } catch (e: any) {
+    } catch (e) {
       console.error(e);
-      res.status(500).json({ error: e.message });
+      res.status(500).json({ error: "Chat is temporarily unavailable." });
     }
   });
 
