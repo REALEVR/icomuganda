@@ -165,7 +165,7 @@ export function Museums() {
             {filtered.map((museum) => (
               <div key={museum.id} className="group flex flex-col bg-white rounded-3xl overflow-hidden border border-stone shadow-sm hover:shadow-xl transition-all duration-300">
                 <Link to={`/museums/${museum.id}`} className="aspect-[4/3] overflow-hidden relative block">
-                  <img src={museum.img} alt={museum.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                  <img loading="lazy" decoding="async" src={museum.img} alt={museum.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                   <div className="absolute top-4 right-4 bg-white/90 backdrop-blur text-earth-dark text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
                     {museum.type}
                   </div>

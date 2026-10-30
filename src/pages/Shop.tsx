@@ -92,7 +92,7 @@ export function Shop() {
             {filteredItems.map((item) => (
               <div key={item.id} className="group bg-white rounded-3xl p-6 shadow-sm border border-stone hover:shadow-xl transition-all flex flex-col h-full cursor-pointer">
                 <div className="aspect-square rounded-2xl overflow-hidden bg-stone mb-6 relative">
-                  <img src={item.img} alt={item.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                  <img loading="lazy" decoding="async" src={item.img} alt={item.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                   <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider text-earth-dark">
                     {item.type}
                   </div>

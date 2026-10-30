@@ -93,7 +93,7 @@ export function VirtualTours() {
           ].map((tour, idx) => (
             <div key={idx} className="group cursor-pointer flex flex-col md:flex-row gap-6 bg-white rounded-3xl p-4 border border-stone hover:shadow-xl transition-all">
               <div className="w-full md:w-48 aspect-square rounded-2xl overflow-hidden relative flex-shrink-0">
-                <img src={tour.img} alt={tour.title} className="w-full h-full object-cover" />
+                <img loading="lazy" decoding="async" src={tour.img} alt={tour.title} className="w-full h-full object-cover" />
                 <div className="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
                   <PlayCircle className="w-10 h-10 text-white" />
                 </div>
