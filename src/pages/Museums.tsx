@@ -114,9 +114,10 @@ export function Museums() {
         <div className="flex flex-col gap-4 mb-12 max-w-5xl mx-auto sticky top-[90px] z-20 bg-warm-white/95 backdrop-blur-md py-4 -mx-6 px-6 border-b border-earth-dark/5">
           <div className="flex flex-col md:flex-row gap-4">
             <div className="relative flex-1">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-earth-muted w-5 h-5" />
+              <Search aria-hidden="true" className="absolute left-4 top-1/2 -translate-y-1/2 text-earth-muted w-5 h-5" />
               <input
-                type="text"
+                type="search"
+                aria-label="Search museums"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="Search museums by name, keyword, or theme..."
@@ -124,6 +125,7 @@ export function Museums() {
               />
             </div>
             <select
+              aria-label="Filter by country"
               value={country}
               onChange={(e) => setCountry(e.target.value)}
               className="px-6 py-4 rounded-full border border-stone bg-white font-medium text-earth-dark focus:outline-none focus:ring-2 focus:ring-earth-accent/50 cursor-pointer"
@@ -131,6 +133,7 @@ export function Museums() {
               {countries.map((c) => <option key={c} value={c}>{c === "All" ? "All Countries" : c}</option>)}
             </select>
             <select
+              aria-label="Filter by culture"
               value={culture}
               onChange={(e) => setCulture(e.target.value)}
               className="px-6 py-4 rounded-full border border-stone bg-white font-medium text-earth-dark focus:outline-none focus:ring-2 focus:ring-earth-accent/50 cursor-pointer max-w-full md:max-w-[220px]"
@@ -139,6 +142,7 @@ export function Museums() {
             </select>
             {hasActiveFilters && (
               <button
+                type="button"
                 onClick={() => { setSearch(""); setCountry("All"); setCulture("All"); }}
                 className="flex items-center gap-2 px-6 py-4 rounded-full text-earth-muted hover:text-earth-dark font-medium transition-colors"
               >
@@ -147,7 +151,7 @@ export function Museums() {
             )}
           </div>
           <div className="flex items-center justify-between text-xs text-earth-muted uppercase tracking-widest font-semibold">
-            <span>{filtered.length} museum{filtered.length !== 1 ? "s" : ""} found</span>
+            <span role="status" aria-live="polite">{filtered.length} museum{filtered.length !== 1 ? "s" : ""} found</span>
             {loading && <span className="flex items-center gap-1.5"><Loader2 className="w-3 h-3 animate-spin" /> Syncing network members...</span>}
           </div>
         </div>
@@ -165,7 +169,7 @@ export function Museums() {
             {filtered.map((museum) => (
               <div key={museum.id} className="group flex flex-col bg-white rounded-3xl overflow-hidden border border-stone shadow-sm hover:shadow-xl transition-all duration-300">
                 <Link to={`/museums/${museum.id}`} className="aspect-[4/3] overflow-hidden relative block">
-                  <img src={museum.img} alt={museum.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                  <img src={museum.img} alt={museum.name} loading="lazy" decoding="async" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                   <div className="absolute top-4 right-4 bg-white/90 backdrop-blur text-earth-dark text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
                     {museum.type}
                   </div>
@@ -190,7 +194,7 @@ export function Museums() {
                         {museum.culture}
                       </span>
                     )}
-                    {museum.tags.slice(0, 2).map(tag => (
+                    {(museum.tags ?? []).slice(0, 2).map(tag => (
                       <span key={tag} className="text-xs font-medium bg-stone/50 text-earth-dark px-3 py-1 rounded-full">
                         {tag}
                       </span>
@@ -208,9 +212,10 @@ export function Museums() {
                         rel="noopener noreferrer"
                         onClick={(e) => e.stopPropagation()}
                         title="Visit official website"
+                        aria-label={`Visit ${museum.name} official website (opens in a new tab)`}
                         className="shrink-0 flex items-center justify-center w-11 h-11 rounded-xl border border-earth-dark text-earth-dark hover:bg-earth-dark hover:text-white transition-colors"
                       >
-                        <ExternalLink className="w-4 h-4" />
+                        <ExternalLink aria-hidden="true" className="w-4 h-4" />
                       </a>
                     )}
                   </div>
