@@ -2,9 +2,12 @@ import { useState } from "react";
 import { SEO } from "../components/SEO";
 import photos from "../data/photos.json";
 import { UPLOADED_IMAGES } from "../data/uploadedImages";
+import { Lightbox, isVideo } from "../components/Lightbox";
 
 export function MediaGallery() {
   const [activeYear, setActiveYear] = useState<string>("2026");
+  // Index into the current year's items of the media open in the lightbox, or null when closed.
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const images2025 = [
     ...UPLOADED_IMAGES,
@@ -63,7 +66,11 @@ export function MediaGallery() {
           {years.map((year) => (
             <button
               key={year}
-              onClick={() => setActiveYear(year)}
+              onClick={() => {
+                setActiveYear(year);
+                setOpenIndex(null);
+              }}
+              aria-pressed={activeYear === year}
               className={`px-8 py-3 rounded-full font-serif text-lg transition-all duration-300 ${
                 activeYear === year 
                   ? "bg-earth-dark text-warm-white shadow-md transform scale-105" 
@@ -82,18 +89,35 @@ export function MediaGallery() {
         ) : (
           <div className="columns-1 md:columns-2 lg:columns-3 xl:columns-4 gap-6 space-y-6">
             {currentGalleryImages.map((img: string, i: number) => (
-              <div key={`gallery-item-${i}`} className="break-inside-avoid relative group rounded-2xl overflow-hidden cursor-pointer shadow-sm hover:shadow-xl transition-shadow duration-500">
-                {img.endsWith('.mp4') ? (
-                  <video src={img} className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-700" autoPlay muted loop playsInline controls />
+              <button
+                type="button"
+                key={`gallery-item-${i}`}
+                onClick={() => setOpenIndex(i)}
+                aria-label={`Open ${activeYear} gallery item ${i + 1} of ${currentGalleryImages.length}`}
+                className="block w-full break-inside-avoid relative group rounded-2xl overflow-hidden cursor-pointer shadow-sm hover:shadow-xl transition-shadow duration-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-earth-dark"
+              >
+                {isVideo(img) ? (
+                  // Silent looping preview; full playback controls live in the lightbox.
+                  <video src={img} className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-700" autoPlay muted loop playsInline aria-hidden="true" />
                 ) : (
                   <img src={img} alt={`${activeYear} Gallery item`} className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-700" />
                 )}
-                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
+                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
                   <span className="text-white font-serif italic text-xl">View Details</span>
                 </div>
-              </div>
+              </button>
             ))}
           </div>
+        )}
+
+        {openIndex !== null && currentGalleryImages[openIndex] && (
+          <Lightbox
+            items={currentGalleryImages}
+            index={openIndex}
+            label={`${activeYear} gallery item ${openIndex + 1} of ${currentGalleryImages.length}`}
+            onClose={() => setOpenIndex(null)}
+            onNavigate={setOpenIndex}
+          />
         )}
       </div>
     </div>
