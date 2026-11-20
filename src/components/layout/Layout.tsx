@@ -1,9 +1,10 @@
 import { Outlet } from "react-router-dom";
 import { Navbar } from "./Navbar";
 import { Footer } from "./Footer";
+import { RouteFallback } from "./RouteFallback";
 import { Chatbot } from "../Chatbot";
 import { MemberDashboard } from "../MemberDashboard";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { User } from 'firebase/auth';
 import { initAuth } from "../../lib/auth";
 import { isNetworkAdmin } from "../../lib/admin";
@@ -27,7 +28,9 @@ export function Layout() {
     <div className="min-h-screen flex flex-col">
       <Navbar user={user} isAdmin={isNetworkAdmin(user)} />
       <main className="flex-1 pt-[90px]">
-        <Outlet />
+        <Suspense fallback={<RouteFallback />}>
+          <Outlet />
+        </Suspense>
       </main>
       <Chatbot />
       {user && <MemberDashboard user={user} />}
