@@ -10,7 +10,7 @@ import { useGSAP } from "@gsap/react";
 
 const navLinks = [
   { name: "Plan your visit", path: "/visit", color: "text-[#0ea5e9]", hoverColor: "hover:text-[#0ea5e9]", borderColor: "border-[#0ea5e9]" },
-  { name: "What's on", path: "/whats-on", color: "text-[#0284c7]", hoverColor: "hover:text-[#0284c7]", borderColor: "border-[#0284c7]" },
+  { name: "What's on", path: "/events", color: "text-[#0284c7]", hoverColor: "hover:text-[#0284c7]", borderColor: "border-[#0284c7]" },
   { name: "Museum Network", path: "/museums", color: "text-[#082f49]", hoverColor: "hover:text-[#082f49]", borderColor: "border-[#082f49]" },
   { name: "Virtual Tours", path: "/virtual-tours", color: "text-[#38bdf8]", hoverColor: "hover:text-[#38bdf8]", borderColor: "border-[#38bdf8]" },
   { name: "Play Game", path: "/game", color: "text-[#f59e0b]", hoverColor: "hover:text-[#f59e0b]", borderColor: "border-[#f59e0b]" },
@@ -75,6 +75,9 @@ export function Navbar({ isAdmin }: { user?: User | null; isAdmin?: boolean } = 
   });
 
   const handleClick = contextSafe((e: React.MouseEvent<HTMLAnchorElement>, path: string) => {
+    // Let the browser handle "open in new tab/window" (Ctrl/Cmd/Shift-click,
+    // middle-click) instead of hijacking it into an in-page navigation.
+    if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
     e.preventDefault();
     if (!threadRef.current) return;
     
