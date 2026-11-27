@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import { MotionConfig } from "motion/react";
 import { Layout } from "./components/layout/Layout";
@@ -22,6 +22,7 @@ import { MediaGallery } from "./pages/MediaGallery";
 import { Shop } from "./pages/Shop";
 import { Contact } from "./pages/Contact";
 import { Game } from "./pages/Game";
+import { NotFound } from "./pages/NotFound";
 
 export default function App() {
   return (
@@ -52,7 +53,11 @@ export default function App() {
             <Route path="shop" element={<Shop />} />
             <Route path="contact" element={<Contact />} />
             <Route path="game" element={<Game />} />
-            <Route path="*" element={<Home />} />
+            {/* Short, human-friendly aliases (used in the nav and in printed
+                material) that point at the page holding that content. */}
+            <Route path="visit" element={<Navigate to="/museums" replace />} />
+            <Route path="whats-on" element={<Navigate to="/events" replace />} />
+            <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>
       </BrowserRouter>
